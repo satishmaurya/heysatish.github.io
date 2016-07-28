@@ -23,15 +23,7 @@
   position: relative;
 }
 
-#circlr #loader {
-  background: url(images/3d/ajax-loader.gif) center center no-repeat;
-  bottom: 0;
-  display: none;
-  left: 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
+
 .menu{position:absolute;bottom:2%;right:1%}
 .sound{position:absolute;bottom:2%;let:1%}
 .magni{position:absolute;top:2%;left:1%}
@@ -82,7 +74,7 @@ html,body {height:100%}
 </head>
 <body>
 
-  <div id="c" style="display:none">
+  <div id="c">
 
 
 
@@ -186,7 +178,7 @@ html,body {height:100%}
     </div>
 
   </div>
- <div id="l" style="margin:0;padding:0;height:100%;background:url(images/pattern_50.jpg)">
+ <div id="l" style="margin:0;padding:0;height:100%;background:url(images/pattern_50.jpg);display:none">
  <div style="margin:0;padding:0;height:100%;position:relative">
  <img src="images/logo.png" style="width: 55%;position: absolute;bottom: 15%;left: 22%;">
  <img src="images/ajax-loader.gif" style="position: absolute;top: 35%;left: 34%;>
@@ -211,7 +203,7 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 </script>
-<script>
+<!--<script>
 
 $(document).ready(function() {
 
@@ -219,6 +211,6 @@ setTimeout(function(){$('#l').hide();
 					$('#c').show();
  }, 7000);
 });
-</script>
+</script>-->
 </body>
 </html>
