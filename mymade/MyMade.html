@@ -1,0 +1,2829 @@
+<!DOCTYPE html>
+<!-- saved from url=(0017)http://mymade.in/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+
+ <link rel="stylesheet" href="./My Made_files/font-awesome.min.css">
+ <link rel="stylesheet" href="bootstrap/bootstrap.css">
+ <script src="bootstrap/bootstrap.min.js"></script>
+ <script id="facebook-jssdk" src="./My Made_files/sdk.js"></script><script async="" src="./My Made_files/fbevents.js"></script><script src="./My Made_files/cb=gapi.loaded_0" async=""></script><script src="./My Made_files/platform.js" async="" defer="" gapi_processed="true"></script>
+<script src="./My Made_files/client-platform.js" async="" defer="" gapi_processed="true"></script>
+<script src="./My Made_files/all.js"></script>
+
+
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1711018412489899');
+fbq('track', "PageView");</script>
+<noscript>&lt;img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1711018412489899&amp;ev=PageView&amp;noscript=1"
+/&gt;</noscript>
+<!-- End Facebook Pixel Code -->
+<script type="text/javascript">
+//ViewContent
+//Track key page views (ex: product page, landing page or article)
+fbq('track', 'ViewContent');
+
+
+//Search
+//Track searches on your website (ex. product searches)
+fbq('track', 'Search');
+
+
+//AddToCart
+//Track when items are added to a shopping cart (ex. click/landing page on Add to Cart button)
+fbq('track', 'AddToCart');
+
+
+//AddToWishlist
+//Track when items are added to a wishlist (ex. click/landing page on Add to Wishlist button)
+fbq('track', 'AddToWishlist');
+
+
+//InitiateCheckout
+//Track when people enter the checkout flow (ex. click/landing page on checkout button)
+fbq('track', 'InitiateCheckout');
+
+
+//AddPaymentInfo
+//Track when payment information is added in the checkout flow (ex. click/landing page on billing info)
+fbq('track', 'AddPaymentInfo');
+
+
+//Purchase
+//Track purchases or checkout flow completions (ex. landing on "Thank You" or confirmation page)
+fbq('track', 'Purchase', {value: '1.00', currency: 'USD'});
+
+
+//Lead
+//Track when a user expresses interest in your offering (ex. form submission, sign up for trial, landing on pricing page)
+fbq('track', 'Lead');
+
+
+//CompleteRegistration
+//Track when a registration form is completed (ex. complete subscription, sign up for a service)
+fbq('track', 'CompleteRegistration');
+
+
+//Other
+//
+//fbq('track', 'Other');
+</script>
+
+
+    <script type="text/javascript">
+        var gpLogin = function () {
+            var myParams = {
+                'clientid': '489675985693-1966dii8pirmmv7p130rq9e616kv9h68.apps.googleusercontent.com',
+                'cookiepolicy': 'single_host_origin',
+                'callback': 'mySignInCallback',
+                'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
+                'requestvisibleactions': 'http://schema.org/AddAction'
+            };
+            gapi.auth.signIn(myParams);
+        };
+        var mySignInCallback = function (authResult) {
+            if (authResult['status']['signed_in'] && authResult['status']['method'] === 'PROMPT') {
+                gapi.client.load('plus', 'v1', loadProfile);
+            }
+        };
+        var loadProfile = function () {
+            var request = gapi.client.plus.people.get({ 'userId': 'me' });
+           
+            request.execute(function (resp) {
+                // console.log('ID: ' + resp.id);
+                // console.log('Email ID: ' + resp.emails[0].value);
+                // console.log('Display Name: ' + resp.displayName);
+                // console.log('Image URL: ' + resp.image.url);
+                var emailID = resp.emails[0].value;
+                var name = resp.displayName;
+                var picture = resp.image.url;
+                document.getElementById("fullname1").value = name;
+                document.getElementById("profileimage1").value = picture;
+                document.getElementById("email1").value = emailID;
+
+                checkemailIDuserGoogle(emailID);
+               
+            });
+       };
+    </script>
+<script>
+   
+   window.fbAsyncInit = function () {
+       // debugger;
+        FB.init({
+            appId: '454035048116795',
+            cookies: true,
+
+            xfbml: true,
+            version: 'v2.5'
+        });
+
+                    
+    };
+
+    // Load the SDK asynchronously
+    (function (d, s, id) {
+        //debugger;
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    // Here we run a very simple test of the Graph API after login is
+    // successful.  See statusChangeCallback() for when this call is made.
+    function testAPI() {
+       // debugger;
+      //  // console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', { fields: 'name,email,picture' }, function (response) {
+            // console.log('Successful login for: ' + response.name);
+            // console.log('Successful login for Email: ' + response.email);
+            // console.log('Successful login for ID: ' + response.id);
+            // console.log('Successful login for Picture: ' + response.picture.data.url);
+
+            var emailID = response.email;
+            var name = response.name;
+            var picture = response.picture.data.url;
+
+            document.getElementById("fullname21").value = response.name;
+            document.getElementById("profileimage21").value = "http://graph.facebook.com/"+response.id+"/picture?type=large";
+            document.getElementById("email21").value = response.email;
+            checkemailIDuserFacebook(response.email);
+           
+        });
+    }
+
+    
+    function loadfacebooklogin() {
+
+        FB.login(function (response) {
+          
+            // console.log('Welcome!  Fetching your information.... ');
+           
+            if (response.status === 'connected') {
+                // Logged into your app and Facebook.
+                testAPI();
+            } else if (response.status === 'not_authorized') {
+                // The person is logged into Facebook, but not your app.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                  'into this app.';
+            } else {
+                // The person is not logged into Facebook, so we're not sure if
+                // they are logged into this app or not.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                  'into Facebook.';
+            }
+        }, { 'scope': 'public_profile,email,user_likes' });
+    }
+   
+</script>
+
+	<title>My Made</title>
+
+	
+
+	<meta name="author" content="scrum technology">
+
+	<meta name="description" content="">
+
+	<link rel="stylesheet" type="text/css" href="./My Made_files/reset.css">
+	<style type="text/css">
+	.amain {
+	
+	color:#FFFFFF ;
+	text-decoration:none;
+}
+.amain:hover 
+{
+	text-decoration:none;
+	color: rgb(0,255,192) ;
+}
+
+ ::-webkit-scrollbar {
+width: 5px;
+}
+
+::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px     rgba(0,0,0,0.3); 
+border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb {
+border-radius: 30px;
+-webkit-box-shadow: inset 0 0 6px     rgba(0,0,0,0.5); 
+}
+ .carousel-inner>.active.left{min-width: 1214px ;margin: 0px; padding: 0;left:-100%}
+</style>
+
+    <link rel="stylesheet" type="text/css" href="./My Made_files/login.css">
+<link rel="icon" href="http://mymade.in/img/mymade_Logo_s.png" type="image/gif">
+	<link rel="stylesheet" type="text/css" href="./My Made_files/main.css">
+
+    <script type="text/javascript" src="./My Made_files/jquery.js"></script>
+
+    <script type="text/javascript" src="./My Made_files/main.js"></script>
+    
+    <script src="./My Made_files/platform.js" async="" defer="" gapi_processed="true"></script>
+    <!-- <script type="text/javascript" src="js/jquery.flexslider-min.js"></script> -->
+    <link rel="stylesheet" href="./My Made_files/flexslider.css">
+<!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css">
+  
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.js"></script> -->
+   <script src="./My Made_files/platform.js" async="" defer="" gapi_processed="true"></script>
+  
+  <!-- <meta name="google-signin-client_id" content="489675985693-1966dii8pirmmv7p130rq9e616kv9h68.apps.googleusercontent.com"> -->
+   
+   <style>
+  #slideshow2 {
+    position:relative;
+    height:350px;
+}
+
+#slideshow2 IMG {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:8;
+}
+
+#slideshow2 IMG.active {
+    z-index:10;
+}
+
+#slideshow2 IMG.last-active {
+    z-index:9;
+}
+  
+  #slideshow {
+    position:relative;
+    height:400px;
+}
+
+#slideshow IMG {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:8;
+}
+
+#slideshow IMG.active {
+    z-index:10;
+}
+
+#slideshow IMG.last-active {
+    z-index:9;
+}
+  </style>
+
+
+
+
+  
+
+   <!--  <script src="themes/js-image-slider.js" type="text/javascript"></script> -->
+
+    <!-------->
+
+<script type="text/javascript" src="./My Made_files/login.js"></script>
+
+
+<style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v2/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head><iframe name="oauth2relay863374438" id="oauth2relay863374438" src="./My Made_files/postmessageRelay.html" tabindex="-1" style="width: 1px; height: 1px; position: absolute; top: -100px;"></iframe>
+
+<body onload="MM_preloadImages(&#39;/img/dropdown/dress_focused.PNG&#39;,&#39;/img/dropdown/top_focused.PNG&#39;,&#39;/img/dropdown/bottom_focused.PNG&#39;,&#39;/img/dropdown/skirt_focused.PNG&#39;,&#39;/img/dropdown/INDIAN WEAR/kurta_focused.PNG&#39;,&#39;/img/dropdown/INDIAN WEAR/lehenga_focused.PNG&#39;,&#39;/img/dropdown/INDIAN WEAR/saree_focused.PNG&#39;,&#39;/img/dropdown/INDIAN WEAR/suit_focused.PNG&#39;,&#39;/img/dropdown/WESTERN WEAR/dress_focused.PNG&#39;,&#39;/img/dropdown/WESTERN WEAR/top_focused.PNG&#39;,&#39;/img/dropdown/WESTERN WEAR/bottom_focused.PNG&#39;,&#39;/img/dropdown/WESTERN WEAR/skirt_focused.PNG&#39;,&#39;/img/dropdown/OCCASION WEAR/party_focus.PNG&#39;,&#39;/img/dropdown/OCCASION WEAR/wedding_focus.PNG&#39;,&#39;/img/dropdown/OCCASION WEAR/office_focus.PNG&#39;,&#39;/img/dropdown/OCCASION WEAR/evening_focus.PNG&#39;,&#39;/img/dropdown/CREATE/membersCreation-FOCUS.png&#39;,&#39;/img/dropdown/CREATE/my creation_icon-focus.png&#39;,&#39;/img/create/SILHUOETTE_FOCUSED.PNG&#39;,&#39;/img/create/STRUCTURE.PNG&#39;,&#39;/img/create/FEBRIC_FOCUSED.PNG&#39;,&#39;/img/create/EMBELISHMENT_FOCUSED.PNG&#39;,&#39;/img/create/MEASUREMENT_FOCUSED.PNG&#39;)">
+
+	<header class="trasparent_nav">
+
+		<div class="logo">
+
+				<a href="http://mymade.in/index.jsp"><img src="./My Made_files/large Logo.PNG" alt="mymade"></a>
+
+	  </div>
+		<div>
+		
+<form action="http://mymade.in/googleregistration.req" method="post" id="googleformsubmit" name="googleformsubmit" style="display : none;">
+<input type="hidden" id="fullname1" name="fullname1">
+<input type="hidden" id="profileimage1" name="profileimage1">
+<input type="hidden" id="email1" name="email1">
+</form>
+
+<!-- <script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    // console.log('statusChangeCallback');
+    // console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      testAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      //document.getElementById('status').innerHTML = 'Please log ' +
+     //   'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+    //  document.getElementById('status').innerHTML = 'Please log ' +
+      //  'into Facebook.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '454035048116795',
+    cookie     : true,  // enable cookies to allow the server to access 
+                        // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.5' // use version 2.5
+  });
+
+  // Now that we've initialized the JavaScript SDK, we call 
+  // FB.getLoginStatus().  This function gets the state of the
+  // person visiting this page and can return one of three states to
+  // the callback you provide.  They can be:
+  //
+  // 1. Logged into your app ('connected')
+  // 2. Logged into Facebook, but not your app ('not_authorized')
+  // 3. Not logged into Facebook and can't tell if they are logged into
+  //    your app or not.
+  //
+  // These three cases are handled in the callback function.
+  };
+  // call facebook login on button click
+function callfacebookloginonclick()
+{
+	 FB.getLoginStatus(function(response) {
+		    statusChangeCallback(response);
+		  });
+}
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    // console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me?fields=id,name,email', function(response) {
+    	// console.log(JSON.stringify(response));
+      // console.log('Successful login for: ' + response.name);
+      // console.log('Successful login for: ' + response.email);
+      // console.log('Successful login for: ' + response.id);
+      // console.log('Successful login for: ' + "http://graph.facebook.com/"+response.id+"/picture?type=large");
+      /* document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!'; */
+      document.getElementById("fullname21").value = response.name;
+      document.getElementById("profileimage21").value = "http://graph.facebook.com/"+response.id+"/picture?type=large";
+      document.getElementById("email21").value = response.email;
+      checkemailIDuserFacebook(response.email);
+    });
+  }
+</script> -->
+<form action="http://mymade.in/facebookregistration.req" method="post" id="facebookformsubmit" name="facebookformsubmit" style="display : none;">
+<input type="hidden" id="fullname21" name="fullname21">
+<input type="hidden" id="profileimage21" name="profileimage21">
+<input type="hidden" id="email21" name="email21">
+</form>
+			<nav>
+
+				<ul style="height : 35px;">
+ 
+
+                   <li><a href="http://mymade.in/#login-box" class="login-window" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;login&#39;,&#39;&#39;,&#39;/img/logInfocus_icon.PNG&#39;,1)"><img alt="Login Icon" style="position: relative; margin-top: -8px; height: 45px; width: 45px;" id="login" src="./My Made_files/logIn_icon1.png"></a></li>
+
+					
+					
+
+                  <li style="cursor:default"><img alt="separator" style="opacity: 0;" src="./My Made_files/separator.png"></li>
+
+					<li><a href="http://mymade.in/pages/egift-card.jsp" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;gifting&#39;,&#39;&#39;,&#39;/img/gift_ico_focused.png&#39;,1)"><img id="gifting" src="./My Made_files/gift_ico.png" alt="Gifting"></a></li>
+
+                   <li style="cursor:default"><img alt="separator" style="opacity: 0;" src="./My Made_files/separator.png"></li>
+
+                    <li style="cursor: default">
+                    
+                    <a onclick="popupCart()" style="cursor: pointer;" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;cart_fixed&#39;,&#39;&#39;,&#39;/img/cart_focused_ico.png&#39;,1)"><img id="cart_fixed" src="./My Made_files/cart_ico.png" alt="Cart"></a>
+                    
+                    
+                    </li>
+                   <li style="cursor:default"><img alt="separator" style="opacity: 0;" src="./My Made_files/separator.png"></li>
+                   <li><a href="http://mymade.in/pages/FAQ.jsp" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;enquire&#39;,&#39;&#39;,&#39;/img/sample1.png&#39;,1)"><img id="enquire" src="./My Made_files/enquire_ico.png" alt="Enquire"></a></li>
+
+                  
+
+				</ul>
+
+			</nav>
+
+		</div>
+
+        <div id="login-box" style="margin-top: -160px;
+
+  margin-left:-262px" class="login-popup">
+
+        <a href="http://mymade.in/#" onclick="resetform()" class="close" style="float : none; opacity : 1;"><img src="./My Made_files/cancel_button.png" class="btn_close" title="Close Window" alt="Close"></a>
+
+           <div class="popup-nav">
+
+				<ul>
+
+					<li><a id="loginTabSignin" class="selected-nav" onclick="selectLoginTab(&#39;signin&#39;)">LOGIN</a></li>
+
+					<li><a id="loginTabSignup" class="" onclick="selectLoginTab(&#39;signup&#39;)">SIGN UP</a></li>
+
+				</ul>
+
+		  </div>
+
+          <form method="post" id="signin" class="signin">
+
+          
+
+				
+
+                <fieldset class="textbox" style="border: none; color: #CCC; margin: 55px 0 0 116px;">
+
+            	<label class="username">
+
+                <input id="username" name="username" value="" type="text" placeholder="Username">
+
+                </label>
+
+                
+
+                <label class="password">
+
+                <input id="password" name="password" value="" type="password" placeholder="Password">
+
+                </label>
+ <label id="displayloginemptymsg" style=" display : none; float : left;color: red; width: 165px; padding-left: 5px; padding-top: 5px; padding-bottom: 0; height: 15px; font-size: 12px;  font-weight: bold;">Enter Correct Email and Password.</label>
+                 <label id="displayloginerrormsg" style=" display : none; float : left;color: red; width: 165px; padding-left: 5px; padding-top: 5px; padding-bottom: 0; height: 15px; font-size: 12px;  font-weight: bold;">That Mymade account doesn't exist. Enter a different account or get a <a style="color: #666;" id="loginTabSignup" class="" onclick="selectLoginTab(&#39;signup&#39;)">new one.</a></label>
+                 
+
+                 <p>
+
+                <a style="font-size: 11px;line-height: 18px;text-decoration: none;" class="forgot" href="http://mymade.in/pages/password.jsp">Forgot password?<br>
+
+Request a new one</a>
+
+                </p>
+
+                <p style="text-align:left; width:274px; margin-top:50px;font-size: 11px;line-height: 18px;"> By logging in, you agree to out <a style="color:#00f5a7;text-decoration:none;" href="http://mymade.in/pages/termandcondition.jsp">T&amp;C </a>and that you have read our<a style="color:#00f5a7;  text-decoration:none;" href="http://mymade.in/pages/privacypolicy.jsp"> Privacy Policy</a>.</p>
+
+                <button class="btn1" type="button" onclick="checkUserForLoginAccount()">Login</button> <p style="margin-left:31%; padding-top:2%;font-size: 11px;">OR</p>
+<!-- <div style="width: 70%; padding-top: 5%; display: inline-block; text-align: center;">
+                <fb:login-button  style="float : left; " data-size="xlarge" scope="public_profile,email" onclick="callfacebookloginonclick()" onlogin="checkLoginState();"></fb:login-button>
+               <div class="g-signin2" data-onsuccess="onSignIn" style=" float : right;"></div> -->
+               <div class="social_login2">
+              <a style="cursor : pointer;" onclick="loadfacebooklogin();" id="fb_root" class="social_box fb">
+                        
+						<!-- <span class="icon"><i class="fa fa-facebook"></i></span> -->
+						<span class="icon"><img alt="Facebook" title="Facebook" src="./My Made_files/fb.png"></span>
+						<span class="icon_title" title="Login with Facebook">Login with Facebook</span>
+						
+					</a>
+                   	<a onclick="return gpLogin();" class="social_box google" style="cursor: pointer;">
+						<!-- <span class="icon"><i class="fa fa-google-plus"></i></span> -->
+						<span class="icon"><img alt="Google" title="Google" src="./My Made_files/google.png"></span>
+						<span class="icon_title" title="Login with Google+">Login with Google</span>
+					</a>
+     </div>           
+                </fieldset>
+
+          </form>
+
+          <div class="signup">
+
+          <form method="post" name="signup" id="signup" class="signin" style="display:none">
+
+                <fieldset class="textbox">
+
+            	<label class="fullname" style="padding-top: 12px;" id="fullnamelabel">
+
+                <input id="fullname" name="fullname" value="" type="text" autocomplete="on" placeholder="Fullname">
+
+                </label>
+                
+                <label class="Username" style="padding-top: 12px;" id="usernamelabel">
+
+                <input id="Username" name="username" onchange="checkExistinguserName()" type="text" autocomplete="off" placeholder="Username">
+
+ <label id="usernamemsg" style="display : none; padding-top: 0px; width: 260px; font-size: 16px; color: white; background-color: red; margin-top: 5px; padding: 2px; border-radius: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;Someone's already using that Username.</label>
+</label>
+
+                <label style="padding-top: 12px;" id="emaillabel"> 
+
+                <input onchange="checkemailIDuser()" id="email" name="email" value="" type="email" autocomplete="off" placeholder="Email">
+
+				<label id="emailmsg" name="emailmsg" style="display : none; padding-top: 0px; width: 260px; font-size: 16px; color: white; background-color: red; margin-top: 5px; padding: 2px; border-radius: 3px;">&nbsp;&nbsp;&nbsp;&nbsp;Someone's already using that email.</label>
+
+                </label>
+
+                <label class="password" id="passwordlabel" style="padding-top: 12px;">
+
+                
+
+                <input id="Password" name="Password" value="" type="password" placeholder="Password">
+
+				</label>
+
+                
+
+                <label id="confirmpasswordlabel" class="password" style="padding-top: 12px;">
+
+                <input id="confirmpassword" name="confirm_password" value="" type="password" placeholder="Confirm Password">
+
+              	</label>
+              	
+                <label style="padding-top: 12px; display : none;">
+
+                <input id="contact" name="contact" value="0" type="text" placeholder="Contact Number">
+
+				<input type="hidden" name="url" id="url">
+
+                </label>
+                <p id="paratoplogin" style="text-align:left; width:274px; margin-top:15px;font-size: 11px;line-height: 18px;"> By logging in, you agree to out <a style="color:#00FFC0;text-decoration:none;" href="http://mymade.in/pages/termandcondition.jsp">T&amp;C </a>and that you have read our<a style="color:#00FFC0;  text-decoration:none;" href="http://mymade.in/pages/privacypolicy.jsp"> Privacy Policy</a>.</p>
+
+                <button class="btn1" type="button" onclick="signupformSubmit(&#39;signup&#39;)">Register</button>
+
+                </fieldset>
+
+          </form>
+
+          </div>
+
+        </div>
+
+</header>
+
+    <!-- End trasparent_nav -->
+
+<header class="fixed_nav" style="margin-top: -135px;">
+
+	
+
+		<div class="wrapper">
+
+       <nav>
+
+				<ul style="margin-bottom:0px">
+				<li style="padding-top:12px"><a href="http://mymade.in/#"><img src="./My Made_files/logo_left_decor.png" alt="mymade"></a>
+
+					
+
+                   </li><li><a href="http://mymade.in/#login-box" class="login-window" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;login1&#39;,&#39;&#39;,&#39;/img/logInfocus_icon.PNG&#39;,1)"><img style="position: relative; margin-top: 4px; height: 45px; width: 45px;" id="login1" src="./My Made_files/logIn_icon1.png" alt="Login"></a></li>
+
+					
+					
+					
+
+					
+
+                  <li style="padding-top:12px; cursor:default"><img alt="Img" style="opacity: 0;" src="./My Made_files/separator.png"></li>
+
+					<li style="padding-top:12px"><a href="http://mymade.in/pages/egift-card.jsp" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;gifting_fixed&#39;,&#39;&#39;,&#39;/img/gift_ico_focused.png&#39;,1)"><img id="gifting_fixed" src="./My Made_files/gift_ico.png" alt="Gifting"></a></li>
+
+                   <li><a href="http://mymade.in/#"><img src="./My Made_files/mini logo.PNG" alt="mymade"></a>
+
+                   </li><li style="padding-top:12px">
+                    
+                    <a onclick="popupCart1()" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;cart_fixed&#39;,&#39;&#39;,&#39;/img/cart_focused_ico.png&#39;,1)"><img id="cart_fixed" src="./My Made_files/cart_ico.png" alt="Cart"></a><span id="cart_items1"></span>
+                    
+                    </li>
+                    <li style="padding-top:12px; cursor:default"><img alt="Img" style="opacity: 0;" src="./My Made_files/separator.png"></li>
+
+                   <li style="padding-top:12px"><a href="http://mymade.in/pages/FAQ.jsp" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;enquire_fixed&#39;,&#39;&#39;,&#39;/img/sample1.png&#39;,1)"><img id="enquire_fixed" src="./My Made_files/enquire_ico.png" alt="Enquire"></a></li>
+
+                    <li style="padding-top:12px"><a href="http://mymade.in/#"><img src="./My Made_files/logo_right_decor.png" alt="mymade"></a>
+
+				</li></ul>
+
+		  </nav>
+<!-- 
+            <section class="billboard2">
+
+        <ul>            
+                    <li><a class="scroll" href="http://mymade.in/home/index.jsp#indian">INDIAN WEAR</a>
+                    <ul style=" width:240px; height:81px; background:url(/img/dropdown/sub_catagry_bg.PNG) no-repeat; font-family:sans-serif, Calibri; font-size:9px; color:#999; margin-left:-70px; border-top:#00f5a7 3px solid;">
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Indowestern" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;indowestern&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/indowestern_focused.PNG&#39;,1)"><img style="margin-top : -4px; width : 54px; height : 58px;" alt="Indowestern" id="indowestern" src="./My Made_files/indowestern.PNG"></a>
+                    <span style="position:absolute; margin:56px 0 0 -46px;">INDO <br> WESTERN</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Lehenga" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;lahenga&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/lehenga_focused.PNG&#39;,1)"><img alt="Img" id="lahenga" src="./My Made_files/lehenga.PNG"></a>
+                    <span style="position:absolute; margin:65px 0 0 -50px;">LAHENGA</span></li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Saree" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;saree&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/saree_focused.PNG&#39;,1)"><img id="saree" src="./My Made_files/saree.PNG" alt="Saree"></a>
+                    <span style="position:absolute; margin:65px 0 0 -46px;">SAREE</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Suit" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;suit&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/suit_focused.PNG&#39;,1)"><img id="suit" src="./My Made_files/suit.PNG" alt="Suit"></a>
+                    <span style="position:absolute; margin:65px 0 0 -55px;">SUIT/KURTA</span>
+                    </li>                  
+                    </ul>
+                    </li>
+					<li><a class="scroll" href="http://mymade.in/home/index.jsp#western">WESTERN WEAR</a>
+                    <ul style=" width:240px; height:81px; background:url(/img/dropdown/sub_catagry_bg.PNG) no-repeat; font-family:sans-serif, Calibri; font-size:9px; color:#999; margin-left:-70px; border-top:#00f5a7 3px solid;">
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Dress" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;dress&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/dress_focused.PNG&#39;,1)"><img id="dress" src="./My Made_files/dress.PNG" alt="Dress"></a>
+                    <span style="position:absolute; margin:65px 0 0 -46px;">DRESS</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Tops" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;top&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/top_focused.PNG&#39;,1)"><img id="top" src="./My Made_files/top.PNG" alt="Top"></a>
+                    <span style="position:absolute; margin:65px 0 0 -40px;">TOP</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Bottoms" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;bottom&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/bottom_focused.PNG&#39;,1)"><img id="bottom" src="./My Made_files/bottom.PNG" alt="Bottom"></a>
+                    <span style="position:absolute; margin:65px 0 0 -50px;">BOTTOM</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Skirts" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;skirt&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/skirt_focused.PNG&#39;,1)"><img id="skirt" src="./My Made_files/skirt.PNG" alt="Skirt"></a>
+                    <span style="position:absolute; margin:65px 0 0 -45px;">SKIRT</span>
+                    </li>                 
+                    </ul>
+                    </li>
+                    <li><a class="scroll" href="http://mymade.in/home/index.jsp#occasion">OCCASION WEAR</a>
+                    <ul style=" width:240px; height:81px; background:url(/img/dropdown/sub_catagry_bg.PNG) no-repeat; font-family:sans-serif, Calibri; font-size:9px; color:#999; margin-left:-70px; border-top:#00f5a7 3px solid;">
+                    <li><a href="http://mymade.in/pages/product.jsp?occasion=Party" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;party&#39;,&#39;&#39;,&#39;/img/dropdown/OCCASION WEAR/party_focus.PNG&#39;,1)"><img id="party" src="./My Made_files/party.PNG" alt="Party"></a>
+                    <span style="position:absolute; margin:65px 0 0 -44px;">PARTY</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?occasion=Wedding" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;wedding&#39;,&#39;&#39;,&#39;/img/dropdown/OCCASION WEAR/wedding_focus.PNG&#39;,1)"><img id="wedding" src="./My Made_files/wedding.PNG" alt="Wedding"></a>
+                    <span style="position:absolute; margin:65px 0 0 -50px;">WEDDING</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?occasion=Office" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;office&#39;,&#39;&#39;,&#39;/img/dropdown/OCCASION WEAR/office_focus.PNG&#39;,1)"><img id="office" src="./My Made_files/office.PNG" alt="Office"></a>
+                    <span style="position:absolute; margin:65px 0 0 -45px;">OFFICE</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?occasion=Evening" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;evening&#39;,&#39;&#39;,&#39;/img/dropdown/OCCASION WEAR/evening_focus.PNG&#39;,1)"><img id="evening" src="./My Made_files/evening.PNG" alt="Evening"></a>
+                    <span style="position:absolute; margin:65px 0 0 -50px;">EVENING</span>
+                    </li>                   
+                    </ul>
+                    </li>
+					<li style="display: none;"><a class="scroll" href="http://mymade.in/home/index.jsp#create">CREATE</a>
+                    <ul style=" width:587px; height:81px; background:url(/img/dropdown/create_background.PNG) no-repeat; font-family:sans-serif, Calibri; font-size:9px; color:#999; border-top:#00f5a7 3px solid; margin-left:-255px">
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Kurta" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;kurta11&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/kurta_focused.PNG&#39;,1)"><img id="kurta11" alt="Kurta" src="./My Made_files/kurta.PNG"></a>
+                    <span style="position:absolute; margin:65px 0 0 -44px;">KURTA</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Lehenga" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;lahenga11&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/lehenga_focused.PNG&#39;,1)"><img id="lahenga11" src="./My Made_files/lehenga.PNG" alt="Lahenga"></a>
+                    <span style="position:absolute; margin:65px 0 0 -50px;">LAHENGA</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Saree" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;saree11&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/saree_focused.PNG&#39;,1)"><img id="saree11" src="./My Made_files/saree.PNG" alt="Saree"></a>
+                    <span style="position:absolute; margin:65px 0 0 -46px;">SAREE</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Suit" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;suit11&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/suit_focused.PNG&#39;,1)"><img id="suit11" src="./My Made_files/suit.PNG" alt="Suit"></a>
+                    <span style="position:absolute; margin:65px 0 0 -42px;">SUIT</span>
+                    </li>                  
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Dress" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;dress11&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/dress_focused.PNG&#39;,1)"><img id="dress11" src="./My Made_files/dress.PNG" alt="Dress"></a>
+                    <span style="position:absolute; margin:65px 0 0 -46px;">DRESS</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Tops" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;top11&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/top_focused.PNG&#39;,1)"><img id="top11" src="./My Made_files/top.PNG" alt="Top"></a>
+                    <span style="position:absolute; margin:65px 0 0 -40px;">TOP</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Bottoms" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;bottom11&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/bottom_focused.PNG&#39;,1)"><img id="bottom11" src="./My Made_files/bottom.PNG" alt="Bottom"></a>
+                    <span style="position:absolute; margin:65px 0 0 -50px;">BOTTOM</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Skirts" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;skirt11&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/skirt_focused.PNG&#39;,1)"><img id="skirt11" src="./My Made_files/skirt.PNG" alt="Skirt"></a>
+                    <span style="position:absolute; margin:65px 0 0 -46px;">SKIRT</span>
+                    </li> 
+                    
+                    <li><a href="http://mymade.in/#login-box" class="login-window" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;mycreation1&#39;,&#39;&#39;,&#39;/img/dropdown/CREATE/my creation_icon-focus.png&#39;,1)"><img id="mycreation1" src="./My Made_files/my creation_icon.png" alt="My Creations"></a>
+                    <span style="position:absolute; margin:56px 0 0 -50px;">MY<br>
+CREATION</span>
+                    </li>
+                    
+                    <li><a href="http://mymade.in/think-tank/members_creations.jsp" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;member-creation1&#39;,&#39;&#39;,&#39;/img/dropdown/CREATE/membersCreation-FOCUS.png&#39;,1)"><img id="member-creation1" src="./My Made_files/membersCreation.png" alt="Members Creation"></a>
+                    <span style="position:absolute; margin:56px 0 0 -50px;">MEMBER'S<br>
+CREATION</span>
+                    </li>     
+                    </ul>
+                    </li>
+                    
+					<li><a href="http://mymade.in/#login-box" class="login-window">LOOK ALIKE</a></li>
+					
+					<li><a href="http://mymade.in/pages/mymade-gallery.jsp">MY MADE GALLERY</a></li>
+					<li><a href="http://mymade.in/pages/inspiration.jsp">INSPIRATIONS</a></li>
+    </ul>
+
+	</section> -->
+
+      </div>
+
+	</header>    <!-- End fixed_nav -->
+
+    <!----- billboard --->
+
+	<section class="billboard">
+
+       <ul>            
+                    <li><a class="scroll" href="http://mymade.in/home/index.jsp#indian">INDIAN WEAR</a>
+                    <ul style="border-top: #00f5a7 3px solid; width:240px; height:81px;  margin-top: 1px; background:url(/img/dropdown/sub_catagry_bg.PNG) no-repeat; font-family:sans-serif, Calibri; font-size:9px; color:#999; margin-left:-70px;">
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Indowestern" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;indowestern1&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/indowestern_focused.PNG&#39;,1)"><img style="margin-top: -4px;  width : 54px; height : 58px;" alt="Indowestern" id="indowestern1" src="./My Made_files/indowestern.PNG"></a>
+                    <span style="position:absolute; margin:56px 0 0 -46px;">INDO <br> WESTERN</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Lehenga" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;lahenga1&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/lehenga_focused.PNG&#39;,1)"><img id="lahenga1" src="./My Made_files/lehenga.PNG" alt="Lahenga"></a>
+                    <span style="position:absolute; margin:65px 0 0 -50px;">LAHENGA</span></li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Saree" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;saree1&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/saree_focused.PNG&#39;,1)"><img id="saree1" src="./My Made_files/saree.PNG" alt="Saree"></a>
+                    <span style="position:absolute; margin:65px 0 0 -46px;">SAREE</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Suit" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;suit1&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/suit_focused.PNG&#39;,1)"><img id="suit1" src="./My Made_files/suit.PNG" alt="Suit"></a>
+                    <span style="position:absolute; margin:65px 0 0 -55px;">SUIT/KURTA</span>
+                    </li>                  
+                    </ul>
+                    </li>
+					<li><a class="scroll" href="http://mymade.in/home/index.jsp#western">WESTERN WEAR</a>
+                    <ul style="border-top: #00f5a7 3px solid; width:240px; height:81px;  margin-top: 1px; background:url(/img/dropdown/sub_catagry_bg.PNG) no-repeat; font-family:sans-serif, Calibri; font-size:9px; color:#999; margin-left:-70px;">
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Dress" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;dress1&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/dress_focused.PNG&#39;,1)"><img id="dress1" src="./My Made_files/dress.PNG" alt="Dress"></a>
+                    <span style="position:absolute; margin:65px 0 0 -46px;">DRESS</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Tops" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;top1&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/top_focused.PNG&#39;,1)"><img id="top1" src="./My Made_files/top.PNG" alt="Top"></a>
+                    <span style="position:absolute; margin:65px 0 0 -40px;">TOP</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Bottoms" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;bottom1&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/bottom_focused.PNG&#39;,1)"><img id="bottom1" src="./My Made_files/bottom.PNG" alt="Bottom"></a>
+                    <span style="position:absolute; margin:65px 0 0 -50px;">BOTTOM</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?dresstype=Skirts" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;skirt1&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/skirt_focused.PNG&#39;,1)"><img id="skirt1" src="./My Made_files/skirt.PNG" alt="Skirt"></a>
+                    <span style="position:absolute; margin:65px 0 0 -45px;">SKIRT</span>
+                    </li>                 
+                    </ul>
+                    </li>
+                    <li><a class="scroll" href="http://mymade.in/home/index.jsp#occasion">OCCASION WEAR</a>
+                    <ul style="border-top: #00f5a7 3px solid; width:240px; height:81px;   margin-top: 1px;background:url(/img/dropdown/sub_catagry_bg.PNG) no-repeat; font-family:sans-serif, Calibri; font-size:9px; color:#999; margin-left:-70px;">
+                    <li><a href="http://mymade.in/pages/product.jsp?occasion=Party" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;party1&#39;,&#39;&#39;,&#39;/img/dropdown/OCCASION WEAR/party_focus.PNG&#39;,1)"><img id="party1" src="./My Made_files/party.PNG" alt="Party"></a>
+                    <span style="position:absolute; margin:65px 0 0 -44px;">PARTY</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?occasion=Wedding" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;wedding1&#39;,&#39;&#39;,&#39;/img/dropdown/OCCASION WEAR/wedding_focus.PNG&#39;,1)"><img id="wedding1" src="./My Made_files/wedding.PNG" alt="Wedding"></a>
+                    <span style="position:absolute; margin:65px 0 0 -50px;">WEDDING</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?occasion=Office" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;office1&#39;,&#39;&#39;,&#39;/img/dropdown/OCCASION WEAR/office_focus.PNG&#39;,1)"><img id="office1" src="./My Made_files/office.PNG" alt="Office"></a>
+                    <span style="position:absolute; margin:65px 0 0 -45px;">OFFICE</span>
+                    </li>
+                    <li><a href="http://mymade.in/pages/product.jsp?occasion=Evening" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;evening1&#39;,&#39;&#39;,&#39;/img/dropdown/OCCASION WEAR/evening_focus.PNG&#39;,1)"><img id="evening1" src="./My Made_files/evening.PNG" alt="Evening"></a>
+                    <span style="position:absolute;margin:65px 0 0 -50px;">EVENING</span>
+                    </li>                   
+                    </ul>
+                    </li>
+					<li style="display: none;"><a class="scroll" href="http://mymade.in/home/index.jsp#create">CREATE</a>
+                    <ul style=" border-top: #00f5a7 3px solid;width:587px; height:81px;   margin-top: 1px;background:url(/img/dropdown/create_background.PNG) no-repeat; font-family:sans-serif, Calibri; font-size:9px; color:#999; border-top:#00f5a7 3px solid; margin-left:-255px">
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Kurta" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;kurta12&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/kurta_focused.PNG&#39;,1)"><img alt="Kurta" id="kurta12" src="./My Made_files/kurta.PNG"></a>
+                    <span style="position:absolute; margin:65px 0 0 -44px;">KURTA</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Lehenga" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;lahenga12&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/lehenga_focused.PNG&#39;,1)"><img id="lahenga12" src="./My Made_files/lehenga.PNG" alt="Lahenga"></a>
+                    <span style="position:absolute; margin:65px 0 0 -50px;">LAHENGA</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Saree" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;saree12&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/saree_focused.PNG&#39;,1)"><img id="saree12" src="./My Made_files/saree.PNG" alt="Saree"></a>
+                    <span style="position:absolute; margin:65px 0 0 -46px;">SAREE</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Suit" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;suit12&#39;,&#39;&#39;,&#39;/img/dropdown/INDIAN WEAR/suit_focused.PNG&#39;,1)"><img id="suit12" src="./My Made_files/suit.PNG" alt="Suit"></a>
+                    <span style="position:absolute; margin:65px 0 0 -42px;">SUIT</span>
+                    </li>                  
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Dress" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;dress12&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/dress_focused.PNG&#39;,1)"><img id="dress12" src="./My Made_files/dress.PNG" alt="Dress"></a>
+                    <span style="position:absolute; margin:65px 0 0 -46px;">DRESS</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Tops" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;top12&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/top_focused.PNG&#39;,1)"><img id="top12" src="./My Made_files/top.PNG" alt="Top"></a>
+                    <span style="position:absolute; margin:65px 0 0 -40px;">TOP</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Bottoms" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;bottom12&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/bottom_focused.PNG&#39;,1)"><img id="bottom12" src="./My Made_files/bottom.PNG" alt="Bottom"></a>
+                    <span style="position:absolute; margin:65px 0 0 -50px;">BOTTOM</span>
+                    </li>
+                    <li><a href="http://mymade.in/home/create.jsp?dresstype=Skirts" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;skirt12&#39;,&#39;&#39;,&#39;/img/dropdown/WESTERN WEAR/skirt_focused.PNG&#39;,1)"><img id="skirt12" src="./My Made_files/skirt.PNG" alt="Skirt"></a>
+                    <span style="position:absolute; margin:65px 0 0 -44px;">SKIRT</span>
+                    </li>
+                     
+                    <li><a href="http://mymade.in/#login-box" class="login-window" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;mycreation1&#39;,&#39;&#39;,&#39;/img/dropdown/CREATE/my creation_icon-focus.png&#39;,1)"><img id="mycreation1" src="./My Made_files/my creation_icon.png" alt="My Creations"></a>
+                    <span style="position:absolute; margin:56px 0 0 -50px;">MY<br>
+CREATION</span>
+                    </li>
+                    
+                    <li><a href="http://mymade.in/think-tank/members_creations.jsp" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;member-creation&#39;,&#39;&#39;,&#39;/img/dropdown/CREATE/membersCreation-FOCUS.png&#39;,1)"><img id="member-creation" src="./My Made_files/membersCreation.png" alt="Members Creation"></a>
+                    <span style="position:absolute; margin:56px 0 0 -50px;">MEMBER'S<br>
+CREATION</span>
+                    </li>     
+                    </ul>
+                    </li>
+                    
+					<li><a href="http://mymade.in/#login-box" class="login-window">LOOK ALIKE</a></li>
+					
+					<li><a href="http://mymade.in/pages/mymade-gallery.jsp">MY MADE GALLERY</a></li>
+					<li><a href="http://mymade.in/pages/inspiration.jsp">INSPIRATIONS</a></li>
+    </ul>
+
+	</section>
+
+    <!-- End billboard -->
+
+    <!--- Wrapper----->
+
+	
+	
+	<!-- Banner starts -->
+	
+	<!-- <div class="container" style="width: 1214px ; height : 420px; margin: 0px; padding: 0;" >
+  <br>
+  <div id="banner" class="carousel slide" data-ride="carousel" data-interval="3000" style="margin: 0px; padding: 0;height:400px;width : 1214px;">
+    Indicators
+    <ol class="carousel-indicators">
+      <li data-target="#banner" data-slide-to="0" class="active"></li>
+      <li data-target="#banner" data-slide-to="1"></li>
+      <li data-target="#banner" data-slide-to="2"></li>
+      <li data-target="#banner" data-slide-to="3"></li>
+      <li data-target="#banner" data-slide-to="4"></li>
+      <li data-target="#banner" data-slide-to="5"></li>
+    </ol>
+
+    Wrapper for slides
+    <div class="carousel-inner" role="listbox">
+
+      <div class="item active" >
+        <img id="banner1" alt="Banner"   style="width: 1214px ; height: 400px;">
+     
+      </div>
+
+      <div class="item" >
+        <img id="banner2" alt="Banner"   style="width: 1214px ; height: 400px;">
+     
+      </div>
+    
+      <div class="item" >
+        <img id="banner3" alt="Banner"   style="width: 1214px ; height: 400px;">
+      
+      </div>
+
+      <div class="item" >
+        <img id="banner4" alt="Banner"  style="width: 1214px ; height: 400px;">
+      
+      </div>
+      
+       <div class="item">
+        <img id="banner5" alt="Banner"  style="width: 1214px ; height: 400px;">
+       
+      </div>
+      
+      <div class="item">
+        <img id="banner6" alt="Banner"  style="width: 1214px ; height: 400px;">
+       
+      </div>
+  
+    </div>
+
+    Left and right controls
+    <a class="left carousel-control" href="#banner" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#banner" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div> -->
+<!--mobile header-->
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "300px";
+    document.getElementById("myrightnav").style.width = "0";
+    $('.bl-layer').show();
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    $('.bl-layer').hide();
+
+}
+function openRNav() {
+    document.getElementById("myrightnav").style.width = "200px";
+    $('.bl-layer').show();
+}
+
+function closeRNav() {
+    document.getElementById("myrightnav").style.width = "0";
+    $('.bl-layer').hide();
+}
+</script>
+<div class="bl-layer"></div>
+<nav class="navbar-fixed-top m-header">
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+  <span class="m-tl">SHOP FOR</span>
+  <ul>
+    <li><span>WESTERN</SPAN>
+        <a class="m-tg" href="#"><img src="images/wes-dr.png" class="img-responsive"></a>
+        <a class="m-tg" href="#"><img src="images/skirt.png" class="img-responsive"></a>
+        <a class="m-tg" href="#"><img src="images/skirt2.png" class="img-responsive"></a>
+        <a class="m-tg" href="#"><img src="images/bottom.png" class="img-responsive"></a>
+    </li>
+    </li>
+
+     <li><span>INDIAN</SPAN>
+        <a class="m-tg" href="#"><img src="images/wes-dr.png" class="img-responsive"></a>
+        <a class="m-tg" href="#"><img src="images/wes-dr.png" class="img-responsive"></a>
+        <a class="m-tg" href="#"><img src="images/wes-dr.png" class="img-responsive"></a>
+    </li>
+     <li><span>OCCASION</SPAN>
+        <a class="m-tg" href="#"><img src="images/wes-dr.png" class="img-responsive"></a>
+        <a class="m-tg" href="#"><img src="images/wes-dr.png" class="img-responsive"></a>
+        <a class="m-tg" href="#"><img src="images/wes-dr.png" class="img-responsive"></a>
+    </li>
+    <li><a href="#">LOOKALIKE</a></li>
+     <li><a href="#">MYMADE GALLERY</a></li>
+      <li><a href="#">INSPIRATION</a></li>
+  </ul>
+    
+</div>
+<img src="images/nav.png" onclick="openNav()" class="nav-btn">
+<div class="mnu">
+
+
+<div class="m-logo"><img class="img-responsive" src ="images/m-logo.png">
+</div>
+<span class="m-cart"><img class="img-responsive" src="images/m-cart.png"></span>
+<div id="myrightnav" class="sideRnav">
+  <a href="javascript:void(0)" class="closeRbtn" onclick="closeRNav()">&times;</a>
+  <div class="m-avatar">
+    <img src="images/avatar.jpg" class="m-blur">
+    <div class="rds"><img src="images/avatar.jpg"></div>
+    <span>Emma Watson</span>
+  </div>
+  <div class="u-link">
+  <ul>
+ 
+    <li><a href="#">MY ACCOUNT</a></li>
+     <li><a href="#">MY ORDERS</a></li>
+      <li><a href="#">GIFT CARDS</a></li>
+      <li><a href="#">SETTINGS</a></li>
+  </ul>
+    </div>
+</div>
+<span class="m-user" onclick="openRNav()"><img class="img-responsive" src="images/m-user.png"></span>
+</nav>
+<section class="main-part">
+<div id="slideshow" style=" width: 100%; margin-left: 0%;"> 
+    <img id="banner1" alt="Banner1" class="img-responsive" style="width: 100%; opacity: 1;" src="./My Made_files/4800314086352730.png">
+    <img id="banner2" alt="Banner2" style="opacity: 1;" src="./My Made_files/4800122825665499.png" class="img-responsive">
+    <img id="banner3" alt="Banner3" style="opacity: 1;" src="./My Made_files/4800141670804666.png" class="img-responsive">
+     <img id="banner4" alt="Banner4" style="opacity: 1;" src="./My Made_files/4800199465934875.png" class="img-responsive active">
+      <img id="banner5" alt="Banner5" style="opacity: 1;" src="./My Made_files/4800330980040004.png" class="img-responsive">
+       <img id="banner6" alt="Banner6" style="opacity: 1;" src="./My Made_files/4800244478233799.png" class="img-responsive">
+</div>
+
+<span id="cart_items"></span>
+
+
+<!-- Banner Ends -->
+
+           <div style="margin-top: 1px">
+
+     <!-- <h2 onclick="showCoords(event)">Click</h2>
+     <script>
+function showCoords(event) {
+    var x = event.clientX;
+    var y = event.clientY;
+    var coords = "X coords: " + x + ", Y coords: " + y;
+    alert(coords);
+    //document.getElementById("demo").innerHTML = coords;
+}
+</script> -->
+<a id="mobile">
+<div class="row">
+  <div class="col-xs-6" style="padding-left:0"><img src="images/saare.jpg" class="img-responsive"></div>
+  <div class="col-xs-6" style="padding-left:0"><img src="images/suit.jpg" class="img-responsive"></div>
+</div>
+<div class="row" style="margin-top:15px">
+  <div class="col-xs-6" style="padding-left:0"><img src="images/lehnga.jpg" class="img-responsive"></div>
+  <div class="col-xs-6" style="padding-left:0"><img src="images/lehnga2.jpg" class="img-responsive"></div>
+    </div>
+</a>
+<a id="create">
+       <table style="width:100%; min-height: 700px; display: none;">
+
+       <tbody><tr>
+
+       	<td class="box" style="background: #d3d3d3">
+
+        <a class="amain" href="http://mymade.in/home/create.jsp?dresstype=Dress"><div id="images1" class="" style="height:100%; float:left; width:49.6%; background:url(/img/home/59366248354040.jpg) no-repeat; background-size: cover;">
+
+       <h2 style="">DRESSES</h2>
+
+        <div class="divbox" style="">
+
+        <p>Create your own<br>'MYMADE' Dress</p>
+        </div>
+
+        </div></a>
+<a class="amain" href="http://mymade.in/home/create.jsp?dresstype=Skirts">
+         <div id="images2" class="" style="height:100%; float:right; width:50%; background:url(/img/home/59720399664832.jpg) no-repeat; background-size: cover;">
+
+        <h2 style="  margin-left: 29%;">SKIRTS</h2>
+
+        <div class="divbox" style=" margin-left: 8px;">
+
+        <p>Create your own<br>'MYMADE' Skirts</p>
+</div>
+        </div> </a>
+
+        </td>
+
+        <td id="images11" rowspan="2" style="display: table-cell;">
+        <div id="slider12" class="div-create-main" style=""><div id="slideshow2" class="slide-show-create" style=""> <img id="create_main1" class="" src="./My Made_files/58824557759002.jpg" alt="Banner1" style="opacity: 1;"><img id="create_main2" src="./My Made_files/58864161729515.jpg" alt="Banner2" style="opacity: 1;" class=""><img id="create_main3" src="./My Made_files/59215995815275.jpg" alt="Banner3" style="opacity: 1;" class=""></div></div>
+        <div class="vertical-box2" style="">
+
+         <div class="vertical-box-content2" style=" ">
+
+        <h2 style="">CREATE</h2>
+
+        <div style="">
+
+        <p>Trendy Wear<br>Personal Style</p></div>
+
+        </div>
+</div>
+        
+
+        </td>
+
+        <td class="box" style="background: #d3d3d3">
+        <a class="amain" href="http://mymade.in/home/create.jsp?dresstype=Saree">
+
+        <div id="images3" class="" style="height:100%; float:left; width:49.7%; background:url(/img/home/61273203532650.jpg) no-repeat; background-size: cover;">
+
+       <h2 style="  margin-left: 30%;">SAREE</h2>
+
+        <div class="divbox" style=" margin-left: 8px;">
+
+        
+
+        <p>Create your own<br>'MYMADE' Saree</p></div>
+
+        </div></a>
+<a class="amain" href="http://mymade.in/home/create.jsp?dresstype=Lehenga">
+         <div id="images4" class="" style="height:100%; float:right; width:50%; background:url(/img/home/61282876950721.jpg) no-repeat; background-size: cover;">
+
+        <h2>LEHENGA</h2>
+
+        <div class="divbox" style=" margin-left: 8px;">
+
+        <p>Create your own<br>'MYMADE' Lehenga</p></div>
+
+        </div> 
+</a>
+        </td>
+
+       </tr>
+
+       <tr>
+
+       <td class="box" style="background: #d3d3d3">
+<a class="amain" href="http://mymade.in/home/create.jsp?dresstype=Tops">
+        <div id="images5" class="" style="height:100%; float:left; width:49.6%; background:url(/img/home/61223334734910.jpg) no-repeat; background-size: cover;">
+
+       <h2 style="  margin-left: 32%;">TOPS</h2>
+
+        <div class="divbox" style=" margin-left: 8px;">
+
+        
+
+        <p>Create your own<br>'MYMADE' Tops</p></div> 
+
+        </div></a>
+<a class="amain" href="http://mymade.in/home/create.jsp?dresstype=Bottoms">
+         <div id="images6" class="" style="height:100%; float:right; width:50%; background:url(/img/home/61243067698365.jpg) no-repeat; background-size: cover;">
+
+        <h2 style="margin-left: 23%;">BOTTOMS</h2>
+
+        <div class="divbox" style=" margin-left: 10px;">
+
+        <p>Create your own<br>'MYMADE' Bottoms</p></div>
+
+        </div> </a>
+
+        </td>
+
+       
+
+       <td class="box" style="background: #d3d3d3">
+<a class="amain" href="http://mymade.in/home/create.jsp?dresstype=Kurta">
+        <div id="images7" class="" style="height:100%; float:left; width:49.7%; background:url(/img/home/61311889156083.jpg) no-repeat; background-size: cover;">
+
+       <h2 style="  margin-left: 28%;">KURTA</h2>
+
+        <div class="divbox" style=" margin-left: 6px;">
+
+        
+
+        <p>Create your own<br>'MYMADE' Kurta</p></div>
+
+        </div></a>
+<a class="amain" href="http://mymade.in/home/create.jsp?dresstype=Suit">
+         <div id="images8" class="" style="height:100%; float:right; width:50%; background:url(/img/home/61320027110431.jpg) no-repeat; background-size: cover;">
+
+        <h2 style="  margin-left: 32%;">SUIT</h2>
+
+        <div class="divbox" style="">
+
+       <p>Create your own<br>'MYMADE' Suit</p></div>
+
+        </div> 
+</a>
+        </td>
+
+       </tr>
+    
+ 
+
+       </tbody></table>
+</a>
+<a id="western">
+       <table style="width: 100%; height: 700px;">
+
+       <tbody><tr>
+<td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?dresstype=Dress">
+     <div id="images13" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/61557697939081.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2>DRESS</h2>
+
+        <div class="div-four-box" style="">
+
+        <p>The flattery<br>Statements</p></div>
+
+        </div></a></td>
+       	
+
+        <td id="images12" rowspan="2" class="vertical-box" style="width: 24%; background:url(http://mymade.in/img/home/61539730446875.jpg) no-repeat; background-size: cover;">
+
+         <div class="vertical-box-content">
+
+        <h2 style="margin-right: 26%; margin-top: 22px;text-align:center;">WESTERN<br>WEAR</h2>
+
+        <div style="margin-top: 110px; margin-right: -105px;">
+
+        <p>Trendy Wear<br>Personal Style</p></div>
+
+        </div>
+
+        
+
+        
+
+        </td>
+<td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?dresstype=Skirts">
+     <div id="images14" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/61592897274183.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2>SKIRTS</h2>
+
+        <div class="div-four-box" style=" ">
+
+        <p>The charismatic<br>Appeal</p></div>
+
+        </div></a></td>
+      
+
+       </tr>
+
+       <tr>
+<td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?dresstype=Bottoms">
+     <div id="images15" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/61602337121198.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2>BOTTOMS</h2>
+
+        <div class="div-four-bottom" style="">
+
+        <p>The sultry<br>Fascination</p></div>
+
+        </div></a></td>
+     
+<td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?dresstype=Tops">
+     <div id="images16" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/62088818750317.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2>TOPS</h2>
+
+        <div class="div-four-top" style="">
+
+        <p>The playful<br>Elegance</p></div>
+
+        </div></a></td>
+       
+
+         </tr>
+<!--  lookalike banner  -->
+       <tr>
+
+       
+
+       <td id="images29" class="horizontal-box" colspan="3" style="background:url(http://mymade.in/img/home/62537805645223.jpg) no-repeat; background-size: cover;">
+
+        <img alt="border" src="./My Made_files/border.png" class="border-btw" style="">
+<a class="amain" href="http://mymade.in/pages/look-alike.jsp">
+        <div class="horizontal-box-content-full2" style="height : 197px;">
+
+		
+
+        <h2 style="margin-top:55px;margin-right: 43%;">LOOK ALIKE</h2>
+
+        <div style="margin-top: 116px; margin-right: -170px;">
+
+        <p>Be a celebrity! Design ! Lookalike<br>garments to live your dreams</p></div>
+
+		
+
+        </div>
+</a>
+        
+
+        
+
+        </td>
+
+       </tr>
+             
+
+       </tbody></table>
+       </a>      
+      <a id="indian"> 
+       <table style="width:100%; height: 700px;">
+
+       <tbody><tr>
+     
+<td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?dresstype=Saree">
+     <div id="images18" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/62653732795204.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2>SAREE</h2>
+
+        <div class="div-four-saree" style="">
+
+        <p>Indian sensuality<br>Glorified</p></div>
+
+        </div></a></td>
+       
+
+         <td id="images17" rowspan="2" class="vertical-box" style="width: 24%; background:url(http://mymade.in/img/home/62181379458837.jpg) no-repeat; background-size: cover;">
+
+         <div class="vertical-box-content">
+
+        <h2 style="margin-top:22px;margin-right: 31%;">INDIAN<br>WEAR</h2>
+
+        <div style="margin-top: 102px;margin-right: -95px;">
+
+        <p>Trendy Wear<br>Personal Style</p></div>
+
+        </div>
+
+        
+
+        
+
+        </td>
+<td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?dresstype=Lehenga">
+     <div id="images19" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/62263093090894.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2>LEHENGA</h2>
+
+        <div class="div-four-lehenga" style="">
+
+        <p>Indian wedding<br>Glamour</p></div>
+
+        </div></a></td>
+     
+       </tr>
+
+       <tr>
+<td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?dresstype=Kurta">
+     <div id="images20" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/62332685364901.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2 style="margin-right: 25px;">INDO WESTERN</h2>
+
+        <div class="div-four-kurta" style=" ">
+
+        <p>Indian distinct<br>Identity</p></div>
+
+        </div></a></td>
+       
+    <td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?dresstype=Suit">
+     <div id="images21" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/62380133084821.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2 style="margin-right: 35px;">SUIT/KURTA</h2>
+
+        <div class="div-four-suit" style="">
+
+        <p>Indian vital<br>Adornment</p></div>
+
+        </div></a></td>
+       
+
+      
+
+       </tr>
+
+       <tr>
+
+	  	<td id="images28" class="horizontal-box" colspan="3" style="background:url(http://mymade.in/img/home/62413618221045.jpg) no-repeat; background-size: cover;">
+
+        <img alt="border" src="./My Made_files/border.png" class="border-btw" style="">
+<a class="amain" href="http://mymade.in/pages/mymade-gallery.jsp">
+        <div class="horizontal-box-content-full1" style="height : 197px;">
+
+		
+
+        <h2 style="margin-top:52px;margin-right: 40%;">MYMADE GALLERY</h2>
+
+        <div style="margin-top: 110px; margin-right: -198px;">
+
+        <p>Designed by you created by us</p></div>
+
+		
+
+        </div></a>
+        </td>
+	   </tr>   </tbody></table>
+</a>
+<a id="occasion">       
+       <table style="width:100%; height: 700px;">
+
+       <tbody><tr>
+<td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?occasion=Party">
+     <div id="images23" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/62443179903676.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2>PARTY</h2>
+
+        <div class="div-four-box" style="">
+
+        <p>The radiant<br>Glory</p></div>
+
+        </div></a></td>
+       	
+
+        <td id="images22" rowspan="2" class="vertical-box" style="width: 24%; background:url(http://mymade.in/img/home/62555220896335.jpg) no-repeat; background-size: cover;">
+
+         <div class="vertical-box-content">
+
+        <h2 style="font-size:x-large;float:right;padding: 5px 20px 5px 20px;margin-top:22px;margin-right:76px; text-align:center; border-bottom-style: solid;border-bottom-width: 1px;border-top-style:solid;border-top-width: 1px;">OCCASION<br>WEAR
+
+		</h2>
+
+        <div style="float: right; text-align: center; margin-top: 102px; margin-right: -114px;">
+
+        <p>Trendy Wear<br>Personal Style</p></div>
+
+        </div>
+
+        
+
+        
+
+        </td>
+<td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?occasion=Wedding">
+     <div id="images24" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/62555220896335.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2>WEDDINGS</h2>
+
+        <div class="div-four-wedding" style="">
+
+        <p>The enchanted<br>Festivity</p></div>
+
+        </div></a></td>
+        
+
+       </tr>
+
+       <tr>
+<td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?occasion=Office">
+     <div id="images25" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/62512364422963.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2>OFFICE</h2>
+
+        <div class="div-four-kurta" style="">
+
+        <p>The formal<br>Contour</p></div>
+
+        </div></a></td>
+      
+       
+<td style=" width: 38%;">
+    <a class="amain" href="http://mymade.in/pages/product.jsp?occasion=Evening">
+     <div id="images26" class="boxdown" style="width: 100%; background:url(http://mymade.in/img/home/62490672863561.jpg) no-repeat; background-size: cover;">
+        
+
+        <h2>EVENING</h2>
+
+        <div class="div-four-lehenga" style=" ">
+
+        <p>The sophisticated<br>Feast</p></div>
+
+        </div></a></td>
+       
+
+       
+
+       
+
+       </tr>
+      <!--  brand Ambassador -->
+       <tr>
+
+       	<td colspan="3" class="horizontal-box">
+
+       	<img alt="border" src="./My Made_files/border.png" class="border-btw-split" style="">
+<a class="amain" href="http://mymade.in/pages/brandambassador.jsp">
+        <div id="images30" class="horizontal-box-content-left" style="background:url(http://mymade.in/img/home/62114975332282.jpg) no-repeat; background-size: cover;">
+
+         <h2>BRAND <br>AMBASSADOR</h2>
+
+        <div class="div-two-part3" style=" ">
+
+		<p>Lets collaborate</p></div>
+
+        
+
+        </div></a>
+        
+<a class="amain" href="http://mymade.in/pages/inspiration.jsp">
+        <div id="images27" class="horizontal-box-content-right" style=" width: 49.9%; background:url(http://mymade.in/img/home/62151769750870.jpg) no-repeat; background-size: cover;">
+
+         <h2>INSPIRATION <br> GALLERY</h2>
+
+        <div class="div-two-part4" style=" ">
+
+        <p>Get inspired by mymade</p></div>
+
+	</div></a>
+
+        </td>
+
+       </tr>
+      <tr style="display : none;">
+
+       	<td colspan="3" class="horizontal-box" style="height : 108px; ">
+
+       	<img alt="border" src="./My Made_files/border.png" class="border-btw" style="">
+
+        <div id="images9" class="horizontal-box-content-left" style="background :url(/img/home/61493886729784.jpg) no-repeat; background-size: cover; display : none;">
+
+         <h2>MYMADE</h2>
+
+        <div class="div-two-part1" style="">
+
+		<p>The concept</p></div>
+
+        
+
+        </div>
+<a class="amain" href="http://mymade.in/think-tank/members_creations.jsp">
+        <div id="images10" class="horizontal-box-content-right" style="background:url(/img/home/61512938244785.jpg) no-repeat; background-size: cover; display : none;">
+
+         <h2>MEMBERS CREATION</h2>
+
+        <div class="div-two-part2" style="">
+
+        <p>Get inspired by browsing creativity</p></div>
+
+	</div></a>
+
+        </td>
+
+       </tr>
+   
+
+       </tbody></table>
+</a>
+      </div>
+
+	</section>
+
+
+  
+<script type="text/javascript">
+function footer(){
+	
+
+
+}
+function loadbuyproduct(productId)
+{
+	window.location.assign("/pages/buy.jsp?productid="+productId);
+}
+function contactuspopup()
+{
+ // console.log("Pop UP");
+  $("#contactuspopup").show();
+}
+function closepopup()
+{
+ // console.log("Pop Close");
+  $("#contactuspopup").hide();
+}
+</script>
+<style>
+<!--
+.amain {
+	
+	color:#FFFFFF ;
+	text-decoration:none;
+}
+.amain:hover 
+{
+	text-decoration:none;
+	color: rgb(0,255,192) ;
+}
+-->
+</style>
+
+<footer style="margin-top: 20px;  height: 280px;">
+		<div class="wrapper">
+			<section class="panel" style="display : none;">
+	<!-- 		<div class="f_cols2">
+						
+                        <h3>MOST FAVOURITE</h3>
+                        <div id="footer_display">
+                        <table cellspacing="0" cellpadding="0">
+  <tr style="vertical-align:central">
+    <td><img alt="image" src="img/home/sample1.jpg"></td>
+    <td width="200px"><div style="padding-left:4%">
+    <p>Spiral Dress White</p>
+    <p><strong style="color:#00FFC0; font-size:18px">&hearts;</strong> 200 Likes</p>
+    <p>Rs. 2000</p>
+    </div></td>
+  </tr>
+  <tr style="vertical-align:central">
+    <td><img alt="image" src="img/home/sample2.jpg"></td>
+    <td width="200px"><div style="padding-left:4%">
+    <p>Spiral Dress Grey</p>
+    <p><strong style="color:#00FFC0; font-size:18px">&hearts;</strong> 200 Likes</p>
+     <p>Rs. 2000</p>
+    </div></td>
+  </tr>
+</table>
+</div>
+               </div>	
+                  	<div class="f_cols2">
+                  	<div class="f_cols67">
+						<h3>QUICK CONTACT</h3>
+                        <form action="sendusermail.req?type=userquestion" method="post">
+                        <input style="width:200px; height:25px; background:url(img/home/user.png) no-repeat; border:1px solid #666; color: white; padding-left:15%; margin-bottom:1%" name="name" id="name" type="text" required>
+                        <input style="width:200px; height:25px; background:url(img/home/email.png) no-repeat; border:1px solid #666; color: white; padding-left:15%; margin-bottom:1%" name="email" id="email" type="email" required>
+                        <input style="width:200px; height:25px; background:url(img/home/mobile.png) no-repeat; border:1px solid #666; color: white; padding-left:15%; margin-bottom:1%" name="phone" id="phone" type="text" required>
+                        <textarea style="width:200px; height:55px; background:url(img/home/message.png) no-repeat; border:1px solid #666; color: white; padding-left:14.5%; margin-bottom:1%" name="comment" id="comment" type="text" required></textarea>
+                       
+                       <input style="background-color:#999; color:#fff; text-align:center; border:1px solid #999; height:35px; width:150px; cursor:pointer" name="submit" type="submit" value="SEND MESAGE">
+                        </form> </div>
+              </div>
+					<div class="f_cols2">
+						<h3>FACEBOOK</h3>
+						<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-page" data-href="https://www.facebook.com/pages/MY-Made/1563288973937205" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/facebook"><a href="https://www.facebook.com/facebook">Facebook</a></blockquote></div></div>
+						
+					</div>
+			 -->	
+			</section>
+
+			<div class="footer_widget" style="border : 0;">
+				<div id="contactuspopup" style="position : absolute; display : none; z-index : 2; background-color: #EEE; width: 30%; margin-left: 35%; margin-top: 01%; height: 250px; border-radius: 4px; padding-left: 2%; padding-top: 1%; padding-bottom: 1%; ">
+					<a onclick="closepopup()" class="close"><img style="margin: -38px -0px 0px 90%; z-index: 111; position: absolute;" src="./My Made_files/cancel_button.png" class="btn_close" title="Close Window" alt="Close"></a>
+					<div><h3 style=" margin-bottom: 1%; font-size: 25px; color: #666;">CONTACT INFORMATION</h3></div>
+					
+					<div><form action="http://mymade.in/sendusermail.req?type=userquestion" method="post">
+                        <input style="width: 80%; border-radius: 4px; height:25px; background:url(/img/home/user.png) no-repeat; border:1px solid #666; color: #AAA; padding-left:15%; margin-bottom:2%" name="name" id="name" type="text" placeholder="Name" required="">
+                        <input style="width: 80%; border-radius: 4px; height:25px; background:url(/img/home/email.png) no-repeat; border:1px solid #666; color: #AAA; padding-left:15%; margin-bottom:2%" name="email" id="email" type="email" placeholder="Email" required="">
+                        <input style="width: 80%; border-radius: 4px; height:25px; background:url(/img/home/mobile.png) no-repeat; border:1px solid #666; color: #AAA; padding-left:15%; margin-bottom:2%" name="phone" id="phone" type="text" placeholder="Telephone" required="">
+                        <textarea style="width: 80%; border-radius: 4px; height:55px; background:url(/img/home/message.png) no-repeat; border:1px solid #666; color: #AAA; padding-left:14.5%; margin-bottom:2%" name="comment" id="comment" type="text" placeholder="Comment" required=""></textarea>
+                       
+                       <input style="background-color:#00FFC0; color:#fff; text-align:center; border:1px solid #00FFC0; height:35px; width:150px; cursor:pointer" name="submit" type="submit" value="SEND MESSAGE"><p style="color : #FF5402; margin-right: 5%; float : right;">*All fields required</p>
+                        </form> </div></div>
+                        
+					<div class="f_cols">
+						<h3>INFORMATION</h3>
+						<ul>
+							<li><a href="http://mymade.in/pages/whoweare.jsp">Who We Are</a></li>
+							
+							<li><a href="http://mymade.in/pages/howitallstarted.jsp">How it All Started</a></li>
+							<!-- <li><a href="#">How To Measure Yourself</a></li>
+							<li><a href="#">Stylist Advice</a></li> -->
+	<li><a href="http://mymade.in/pages/sizing.jsp">Sizing </a></li>
+							<li><a onclick="contactuspopup()" style="cursor: pointer;">Contact us</a></li>
+							
+						</ul>
+					</div>	
+
+					<div class="f_cols">
+						<h3>MY ACCOUNT</h3>
+						<ul>
+							
+							<li><a href="http://mymade.in/#login-box" class="login-window">My Profile</a></li>
+							<li><a href="http://mymade.in/#login-box" class="login-window">My Measurements</a></li>
+                            <li><a href="http://mymade.in/#login-box" class="login-window">My Creation</a></li>
+                            <li><a href="http://mymade.in/#login-box" class="login-window">Order History</a></li>
+							
+							
+                            
+						
+							<!-- <li><a href="#">Browse Member</a></li>
+							<li><a href="#">Discount</a></li> -->
+						</ul>	
+					</div>	
+
+					<div class="f_cols">
+						<h3>CUSTOMER SERVICES</h3>
+						<ul>
+						<li><a href="http://mymade.in/pages/termandcondition.jsp">Terms and Conditions</a></li>	
+						<li><a href="http://mymade.in/pages/ship_delivery.jsp">Shipping and delivery</a></li>
+						<li><a href="http://mymade.in/pages/returnpolicy.jsp">Returns and Alterations</a></li>
+							<li><a href="http://mymade.in/pages/privacypolicy.jsp">Privacy Policies</a></li>
+                             
+                            
+						</ul>
+						
+					</div>	
+
+					<div class="f_cols">
+						<h3>CONTACT INFO</h3>
+					
+						<p style=" margin-bottom: 0px;"><b>Helpline</b></p>
+					
+                        <p style=" margin-bottom: 0px;">Email : care@mymade.in</p>
+					</div>
+					<div id="social_links_div" style="margin-left:0%; margin-top: 200px; text-align: center; margin-bottom :  25px; border-bottom: 1px #666 solid; padding-bottom: 10px;">
+					
+		          <a href="http://www.facebook.com/" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;facebook_tab_footer&#39;,&#39;&#39;,&#39;/img/social/facebook.PNG&#39;,1)"><img id="facebook_tab_footer" src="./My Made_files/facebook_white.png" style="margin-right: 10px;"></a>
+		          <a href="http://www.pinterest.com/" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;pininterest_tab_footer&#39;,&#39;&#39;,&#39;/img/social/pininterest.PNG&#39;,1)"><img id="pininterest_tab_footer" src="./My Made_files/pininterest_white.PNG" style="margin-right: 10px;"></a>
+		        
+		          <a href="http://www.twitter.com/" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage(&#39;twitter_tab_footer&#39;,&#39;&#39;,&#39;/img/social/Twitter56.PNG&#39;,1)"><img id="twitter_tab_footer" src="./My Made_files/Twitter_white.PNG"></a>
+		          
+			</div>
+
+			<p class="rights">© 2015 mymade.in &nbsp;Developed By<a class="amain" href="http://www.scrumtechnology.com/"> Scrum Technology</a></p>	
+
+		</div>
+</div></footer><!-- End Footer -->
+
+<script type="text/javascript">
+
+var browser=navigator.vendor;
+var browseruser = navigator.userAgent;
+// console.log("browser name : "+ browser);
+// console.log("browser User : "+ browseruser);
+if( browseruser.search("MSIE") != -1)
+{
+	//console.log("this is Internet Explorer");
+	document.write("<link type=\"text/css\" rel=\"stylesheet\" href=\"/css/IE.css\">");
+	
+}
+else if (browseruser.search("Firefox/") != -1) {
+	//console.log("this is mozilla firefox");
+document.write("<link type=\"text/css\" rel=\"stylesheet\" href=\"/css/FF.css\">");
+
+}
+else if (browseruser.search("OPR/") != -1) {
+	//console.log("this is Opera");
+	document.write("<link type=\"text/css\" rel=\"stylesheet\" href=\"/css/Opera.css\">");
+	
+	}
+ else if (browseruser.search("Safari/") != -1 && browser.search("Apple") !=-1) {
+	//console.log("this is Apple Safari");
+	document.write("<link type=\"text/css\" rel=\"stylesheet\" href=\"/css/Safari.css\">");
+		
+ } 
+else {		//console.log("this is Google crome ");
+	document.write("<link type=\"text/css\" rel=\"stylesheet\" href=\"/css/Crome.css\">");
+    }
+
+</script><link type="text/css" rel="stylesheet" href="./My Made_files/Crome.css">
+<script type="text/javascript">
+function slideSwitch2() {
+    var $active = $('#slideshow2 IMG.active');
+
+    if ( $active.length == 0 ) $active = $('#slideshow2 IMG:last');
+
+    var $next =  $active.next().length ? $active.next()
+        : $('#slideshow2 IMG:first');
+
+    $active.addClass('last-active');
+        
+    $next.css({opacity: 0.0})
+        .addClass('active')
+        .animate({opacity: 1.0}, 1000, function() {
+            $active.removeClass('active last-active');
+        });
+}
+
+function slideSwitch() {
+    var $active = $('#slideshow IMG.active');
+
+    if ( $active.length == 0 ) $active = $('#slideshow IMG:last');
+
+    var $next =  $active.next().length ? $active.next()
+        : $('#slideshow IMG:first');
+
+    $active.addClass('last-active');
+        
+    $next.css({opacity: 0.0})
+        .addClass('active')
+        .animate({opacity: 1.0}, 1000, function() {
+            $active.removeClass('active last-active');
+        });
+}
+var tops=0;
+
+var Homepage;
+function HomePageImages()
+
+{ // console.log("Inside Home Page Images");
+$("#images11").hide();
+$.ajax({
+	url : "/getallhomeimages.req",
+	type : "post",
+	dataType : "json",
+	success : function(result) {
+		// console.log(result);
+		var status = result.status;
+		// console.log("status : " + status);
+		if (status == "success") {
+			Homepage = result.response.homepage;
+			
+			 var banner11 = document.getElementById("banner1");
+			 banner11.setAttribute("src","/img/home/"+Homepage.banner_1+"");
+			 
+			 var banner12 = document.getElementById("banner2");
+			 banner12.setAttribute("src","/img/home/"+Homepage.banner_2+"");
+			 
+			 var banner13 = document.getElementById("banner3");
+			 banner13.setAttribute("src","/img/home/"+Homepage.banner_3+"");
+			 
+			 var banner14 = document.getElementById("banner4");
+			 banner14.setAttribute("src","/img/home/"+Homepage.banner_4+"");
+			 
+			 var banner15 = document.getElementById("banner5");
+			 banner15.setAttribute("src","/img/home/"+Homepage.banner_5+"");
+			 
+			 var banner16 = document.getElementById("banner6");
+			 banner16.setAttribute("src","/img/home/"+Homepage.banner_6+"");
+			 
+		  var images1 = document.getElementById("images1");
+		  images1.setAttribute("style","height:100%; float:left; width:49.6%; background:url(/img/home/"+Homepage.createSub_1+") no-repeat; background-size: cover;");
+		  
+		  
+		  var images2 = document.getElementById("images2");
+		  images2.setAttribute("style","height:100%; float:right; width:50%; background:url(/img/home/"+Homepage.createSub_2+") no-repeat; background-size: cover;");
+		  
+		  var images3 = document.getElementById("images3");
+		  images3.setAttribute("style", "height:100%; float:left; width:49.7%; background:url(/img/home/"+Homepage.createSub_3+") no-repeat; background-size: cover;");
+		 
+		  var images4 = document.getElementById("images4");
+		  images4.setAttribute("style", "height:100%; float:right; width:50%; background:url(/img/home/"+Homepage.createSub_4+") no-repeat; background-size: cover;");
+			 
+		  
+		  var images5 = document.getElementById("images5");
+		  images5.setAttribute("style", "height:100%; float:left; width:49.6%; background:url(/img/home/"+Homepage.createSub_5+") no-repeat; background-size: cover;");
+		  
+		  var images6 = document.getElementById("images6");
+		  images6.setAttribute("style","height:100%; float:right; width:50%; background:url(/img/home/"+Homepage.createSub_6+") no-repeat; background-size: cover;");
+		 
+		  var images7 = document.getElementById("images7");
+		  images7.setAttribute("style","height:100%; float:left; width:49.7%; background:url(/img/home/"+Homepage.createSub_7+") no-repeat; background-size: cover;");
+		  
+		  var images8 = document.getElementById("images8");
+		  images8.setAttribute("style","height:100%; float:right; width:50%; background:url(/img/home/"+Homepage.createSub_8+") no-repeat; background-size: cover;");
+		  
+		  var images9 = document.getElementById("images9");
+		  images9.setAttribute("style","background :url(/img/home/"+Homepage.mymade+") no-repeat; background-size: cover; display : none;");
+		 
+		  var images10 = document.getElementById("images10");
+		  images10.setAttribute("style","background:url(/img/home/"+Homepage.members_creation+") no-repeat; background-size: cover; display : none;");
+		 
+		 createbanner(Homepage.createMain_1,Homepage.createMain_2,Homepage.createMain_3);
+		
+		
+		
+		var images12 = document.getElementById("images12");
+		images12.setAttribute("style","width: 24%; background:url(/img/home/"+Homepage.westernMain+") no-repeat; background-size: cover;" );
+		
+		var images13 = document.getElementById("images13");
+		images13.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.westernSub_1+") no-repeat; background-size: cover;" );
+		
+		var images14 = document.getElementById("images14");
+		images14.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.westernSub_2+") no-repeat; background-size: cover;" );
+		
+		var images15 = document.getElementById("images15");
+		images15.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.westernSub_3+") no-repeat; background-size: cover;" );
+		
+		var images16 = document.getElementById("images16");
+		images16.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.westernSub_4+") no-repeat; background-size: cover;" );
+		
+		var images17 = document.getElementById("images17");
+		images17.setAttribute("style","width: 24%; background:url(/img/home/"+Homepage.indianMain+") no-repeat; background-size: cover;" );
+		
+		var images18 = document.getElementById("images18");
+		images18.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.indianSub_1+") no-repeat; background-size: cover;" );
+		
+		var images19 = document.getElementById("images19");
+		images19.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.indianSub_2+") no-repeat; background-size: cover;" );
+		
+		var images20 = document.getElementById("images20");
+		images20.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.indianSub_3+") no-repeat; background-size: cover;" );
+		
+		var images21 = document.getElementById("images21");
+		images21.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.indianSub_4+") no-repeat; background-size: cover;" );
+		 
+		var images22 = document.getElementById("images22");
+		images22.setAttribute("style","width: 24%; background:url(/img/home/"+Homepage.occasionMain+") no-repeat; background-size: cover;" );
+		
+		var images23 = document.getElementById("images23");
+		images23.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.occasionSub_1+") no-repeat; background-size: cover;" );
+		
+		var images24 = document.getElementById("images24");
+		images24.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.occasionSub_2+") no-repeat; background-size: cover;" );
+		
+		var images25 = document.getElementById("images25");
+		images25.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.occasionSub_3+") no-repeat; background-size: cover;" );
+		
+		var images26 = document.getElementById("images26");
+		images26.setAttribute("style","width: 100%; background:url(/img/home/"+Homepage.occasionSub_4+") no-repeat; background-size: cover;" );
+		 
+		var images27 = document.getElementById("images27");
+		images27.setAttribute("style"," width: 49.9%; background:url(/img/home/"+Homepage.inspiration_gallery+") no-repeat; background-size: cover;" );
+		
+		var images28 = document.getElementById("images28");
+		images28.setAttribute("style","background:url(/img/home/"+Homepage.mymade_gallery+") no-repeat; background-size: cover;" );
+		// console.log(Homepage.look_a_like);
+		var images29 = document.getElementById("images29");
+		images29.setAttribute("style","background:url(/img/home/"+Homepage.look_a_like+") no-repeat; background-size: cover;" );
+		
+		var images30 = document.getElementById("images30");
+		images30.setAttribute("style","background:url(/img/home/"+Homepage.brand_ambassador+") no-repeat; background-size: cover;" );
+		}
+		footer();
+		  	},
+
+	error : function() {
+
+		// console.log("Home Page Dispaly Error");
+	},
+});
+	
+}
+
+function createbanner(createMain_1,createMain_2,createMain_3)
+{
+	$("#images11").show();
+	 var div12=document.getElementById("slider12");
+		var txt55 ="";
+		txt55 +="<div class=\"container\" style=\"width:292px; heigth:100%; position: relative;  margin: 0px; padding: 0;\" ><div id=\"createMain\" class=\"carousel slide\" data-ride=\"carousel\" data-interval=\"2000\" style=\"margin:0px; width:292px; heigth:580px;  padding: 0;\">";
+		 txt55 ="<div id=\"slideshow2\" class=\"slide-show-create\" style=\"\"> "
+		        +"<img id=\"create_main1\" class=\"active\" src=\"/img/home/"+createMain_1+"\" alt=\"Banner1\"  style=\"\">"
+		        +"<img id=\"create_main2\" src=\"/img/home/"+createMain_2+"\" alt=\"Banner2\"   style=\"\">"
+		        +"<img id=\"create_main3\" src=\"/img/home/"+createMain_3+"\" alt=\"Banner3\"   style=\"\"></div>";
+		        div12.innerHTML= txt55;	
+}
+
+
+$(document).ready(function() {
+	$(function() {
+	    setInterval( "slideSwitch()", 8000 );
+	}); 
+	$(function() {
+	    setInterval( "slideSwitch2()", 7000 );
+	}); 
+	
+	HomePageImages();
+	if(window.location.href.indexOf("create") > -1)
+		{
+		tops=503;
+		event.preventDefault();
+		$('html,body').animate({scrollTop:tops}, 1500);
+		// console.log("create page");
+		}
+	 if(window.location.href.indexOf("western") > -1)
+	{
+	tops=1320;
+	event.preventDefault();
+	$('html,body').animate({scrollTop:tops}, 1500);
+	// console.log("western page");
+	}
+	 if(window.location.href.indexOf("indian") > -1)
+		{
+		tops=2109;
+		event.preventDefault();
+		$('html,body').animate({scrollTop:tops}, 1500);
+		// console.log("indian page");
+		}
+	 if(window.location.href.indexOf("occasion") > -1)
+	{
+	tops=2928;
+	event.preventDefault();
+	$('html,body').animate({scrollTop:tops}, 1500);
+	// console.log("occasion page");
+	}
+
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+		   tops=$(this.hash).offset().top;
+			// console.log("tops : "+tops);
+			tops -=118;
+			// console.log("tops : "+tops);
+			$('html,body').animate({scrollTop:tops}, 1500);
+			
+		});
+	
+	$('a.login-window').click(function() {
+
+		
+		
+
+		// Getting the variable's value from a link 
+
+		var loginBox = $(this).attr('href');
+
+
+
+		//Fade in the Popup and add close button
+
+		$(loginBox).fadeIn(300);
+
+		
+
+		//Set the center alignment padding + border
+
+		var popMargTop = ($(loginBox).height() + 24) / 2; 
+
+		var popMargLeft = ($(loginBox).width() + 24) / 2; 
+
+		
+
+		$(loginBox).css({ 
+
+			'margin-top' : -popMargTop,
+
+			'margin-left' : -popMargLeft
+
+		});
+
+		// Add the mask to body
+
+		$('body').append('<div id="mask"></div>');
+
+		$('#mask').fadeIn(300);
+
+		return false;
+
+	});
+
+	
+
+	// When clicking on the button close or the mask layer the popup closed
+
+	$('a.close, #mask').live('click', function() { 
+
+	  $('#mask , .login-popup').fadeOut(300 , function() {
+
+		  // console.log("closing the login popup");
+
+		$('#mask').remove();  
+
+	}); 
+
+	return false;
+
+	});
+	var currPosition = 0;
+	var slideWidth = 1500;
+	var slides = $('.slide');
+	var numberOfSlides = slides.length;
+	var slideInterval;
+	var speed = 1000;
+	
+	slideInterval = setInterval(changePosition, speed);
+	
+	slides.wrapAll('<div id="slidesHolder"></div>')
+	
+	slides.css({ 'float' : 'left' });
+	
+	$('#slidesHolder').css('width', slideWidth * numberOfSlides);
+	function changePosition() {
+		if(currPosition == numberOfSlides - 1) {
+			currPosition = 0;
+		} else {
+			currPosition++;
+		}
+		moveSlide();
+	}
+	function moveSlide() {
+		$('#slidesHolder')
+		.animate({'marginLeft' :   slideWidth*(-currPosition)});
+	
+}
+
+});
+Url = window.location.href;
+var URL3 = Url;
+Url=Url.replace(/=/g,'%3D');
+
+
+function formSubmit(id)
+
+{
+
+	var form1= document.getElementById("signin");
+	form1.setAttribute("action","login.req?url="+Url);
+	document.getElementById(id).submit();
+
+}
+
+function signupform(id)
+{
+
+	var form2= document.getElementById("signup");
+	form2.setAttribute("action","registeruser.req?url="+Url);
+	document.getElementById(id).submit();
+
+}
+
+function signupformSubmit(id)
+
+{ debugger;
+
+	var status = true;
+
+	if(validateFullName()== false)
+
+	{
+
+		status = false;
+
+	}
+
+	if(validateEmail() == false)
+
+	{
+
+		status = false;
+
+	}
+	if(validateContact() == false)
+
+	{
+
+		status = false;
+
+	}
+
+	if(validatePassword()==false)
+
+	{
+
+		status = false;	
+
+	}
+
+	else if(validateConfirmPassword()==false)
+
+	{
+
+		status = false;
+
+	}
+	else if(validateUserName()==false){
+		status=false;
+	}
+	else if(checkemailIDuser() == true)
+	{
+	 status = false;
+	}	
+	else if(checkExistinguserName() == false)
+	{
+	 status = false;
+	}
+	 if(status == true)
+
+	{
+
+		 signupform(id);
+
+	}
+ 
+	
+
+	else
+
+	{
+
+		return false;		
+
+	}
+
+
+
+}
+
+
+
+function validateFullName()
+
+{
+
+	var x=document.signup.fullname.value;
+	var status=false ;
+    for(var i=0;i<x.length;i++){
+    	var t =x.charAt(i);
+    	if(t == " "){
+        	status=false;
+        }
+    	else{
+    		status=true;
+    	}
+    }
+    if(status==true){
+	 status = /^[A-z ]+$/.test(x);
+    }
+    if(status==false)
+
+	{
+    document.getElementById("fullname").setAttribute("style","background: #fff; border: 1px solid red; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+	}
+
+	
+
+	else
+
+	{
+		document.getElementById("fullname").setAttribute("style","background: #fff; border: 1px solid #CCC; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+	
+	}
+
+	return status;
+
+}
+
+
+
+function validateEmail()
+
+{	var email = document.signup.email.value;
+    var status=false;
+    for(var i=0;i<email.length;i++){
+    	var t=email.charAt(i);
+    	if(t == " "){
+    		status=false;
+    	}
+    	else{
+    		status=true;
+    	}
+    }
+    if(status ==true){
+	var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+	 status = filter.test(email);
+    }
+    if(status==false)
+
+	{
+		document.getElementById("email").setAttribute("style","background: #fff; border: 1px solid red; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+
+	}
+
+	
+
+	else
+
+	{
+
+		document.getElementById("email").setAttribute("style","background: #fff; border: 1px solid #CCC; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+	}
+
+	return status;
+
+}
+function validateUserName(){
+	var username = document.signup.Username.value;
+// console.log("username :" + username);
+
+    var status=false;
+    if(username != "" ){
+    for(var i=0;i<username.length;i++){
+    	var t=username.charAt(i);
+    	if(t == " "){
+    		status=false;
+    	}
+    	else{
+    		// console.log("if else"+i+" :"+ status);
+    		status=true;
+    	}
+    }
+	}
+    else{
+    	status=false;
+    }
+    if(status==false)
+
+	{
+		document.getElementById("Username").setAttribute("style","background: #fff; border: 1px solid red; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+
+	}
+
+	
+
+	else
+
+	{
+		document.getElementById("Username").setAttribute("style","background: #fff; border: 1px solid #CCC; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+
+	}
+	return status;
+}
+function validateContact()
+
+{
+
+	
+
+	var contact = document.signup.contact.value;
+// console.log("contact :" + contact );
+var status=false;
+	for(var i=0;i<contact.length;i++){
+		var t=contact.charAt(i);
+		if(t == " "){
+			status=false;
+		}
+		else{
+			status=true;
+		}
+	}
+	if(status==true){
+	var filter = /^[0-9]+$/;
+
+	 status = filter.test(contact);
+	}
+	if(status==false)
+
+	{
+		document.getElementById("contact").setAttribute("style","background: #fff; border: 1px solid red; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+
+	}
+
+	
+
+	else
+
+	{
+		document.getElementById("contact").setAttribute("style","background: #fff; border: 1px solid #CCC; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+
+	}
+
+	return status;
+
+}
+
+
+
+function validatePassword(){
+
+	var x=document.signup.Password.value;
+   var status=false;
+   for(var i=0;i<x.length;i++){
+	   var t=x.charAt(i);
+	   if(t == " "){
+		   status=false;
+	   }
+	   else{
+		   status=true;
+	   }
+   }
+   
+   if(x == null || x.length==0 || status==false)
+
+	{
+
+		document.getElementById("Password").setAttribute("style","background: #fff; border: 1px solid red; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+	}
+
+	else{
+		document.getElementById("Password").setAttribute("style","background: #fff; border: 1px solid #CCC; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+
+	}
+
+
+
+}
+
+
+
+function validateConfirmPassword(){
+
+	var x=document.signup.Password.value;
+
+	var y=document.signup.confirmpassword.value;
+
+	if((y == null || y.length==0)||(y!=x))
+
+	{
+		document.getElementById("confirmpassword").setAttribute("style","background: #fff; border: 1px solid red; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+
+	}
+
+	else
+
+	{
+
+		document.getElementById("confirmpassword").setAttribute("style","background: #fff; border: 1px solid #CCC; color: #00FFC0; border-radius: 3px 3px 3px 3px; -moz-border-radius: 3px;  -webkit-border-radius: 3px; font: 13px calibril, sans-serif;  padding: 6px 6px 4px; width: 250px; height: 25px;");
+	}
+
+
+
+}
+
+
+
+function selectLoginTab(type)
+
+{
+
+	// console.log("Type = "+type);
+
+	if(type=="signin")
+
+	{
+
+		// console.log("Signin Selected");
+
+		$("#loginTabSignup").removeClass("selected-nav");
+
+		document.getElementById("loginTabSignin").className="selected-nav";
+
+		document.getElementById("signup").reset();
+
+		$("#signin").show();
+
+		$("#signup").hide();
+
+	}
+
+	
+
+	else if(type=="signup")
+
+	{
+
+		// console.log("Signup selected");
+
+		$("#loginTabSignin").removeClass("selected-nav");
+
+		document.getElementById("loginTabSignup").className="selected-nav";
+
+		document.getElementById("signin").reset();
+
+		$("#signin").hide();
+
+		$("#signup").show();
+
+	}
+
+}
+
+
+
+
+
+
+
+function resetform()
+
+{
+
+	// console.log("Reseting the forms");
+
+	document.getElementById("signin").reset();
+
+	document.getElementById("signup").reset();
+
+	// console.log("Done reseting");
+
+}
+
+function checkListProfile(){
+	
+	var dropdown1=document.getElementById("dropdown1");
+	dropdown1.innerHTML="<div style=\"background-color:#fff;border-top: #00f5a7 3px solid;margin-top:0px;margin-left:-108px;height:20px;position:absolute;z-index:10;width:225px; background:url(img/dropdown/sub_catagry_bg.PNG)no-repeat;padding:7px; background-size: cover; \"><a style=\"margin-right:10px;margin-left: 0px;\" href=\"think-tank/my_account.jsp\">My Account</a><a style=\"margin-right:10px;\" href=\"think-tank/my_profile.jsp\">My Creation</a><form style=\"display : inline-block;\"  id=\"logoutheaderuser\" action=\"logoutuser.req\"><a style=\"display : inline-block;\" onclick=\"signoutuserall1()\">Logout<input class=\"lgt\" style=\"display : none;\"   type=\"button\"  value=\"Logout\"></a></form></div>";
+	
+	 
+}
+function checkListProfile1(){
+	
+	var dropdown1=document.getElementById("dropdown2");
+	dropdown1.innerHTML="<div style=\"background-color:#fff;border-top: #00f5a7 3px solid;margin-top:0px;margin-left:-108px;height:20px;position:fixed;z-index:10;width:225px ; background:url(img/dropdown/sub_catagry_bg.PNG)no-repeat;padding:7px; background-size: cover; \"><a style=\"margin-right:10px; margin-left: 0px;\" href=\"think-tank/my_account.jsp\">My Account</a><a style=\"margin-right:10px;\" href=\"think-tank/my_profile.jsp\">My Creation</a><form id=\"logoutbodyuser\" action=\"logoutuser.req\"   style=\"display : inline-block;\" ><a style=\"display : inline-block;\" onclick=\"signoutuserall2()\">Logout<input class=\"lgt\" style=\"display : none;\"   type=\"button\"  value=\"Logout\"></a></form></div>";
+	
+	 
+}
+function signoutuserall1()
+{
+	gapi.auth.signOut();
+	/* var auth2 = gapi.auth2.getAuthInstance();
+	// google
+	auth2.signOut().then(function () {// console.log('User signed out.'); 
+	}); */
+	// facebook
+	FB.logout(function(response) {// console.log('User signed out.');
+	});
+	 $("#logoutheaderuser").submit();
+}
+function signoutuserall2()
+{
+	gapi.auth.signOut();
+	/* var auth2 = gapi.auth2.getAuthInstance();
+	// google
+	auth2.signOut().then(function () {// console.log('User signed out.'); 
+	}); */
+	// facebook
+	FB.logout(function(response) {// console.log('User signed out.');
+	});
+	$("#logoutbodyuser").submit(); 
+}
+function removeDropdown(){
+	var removeDrop=document.getElementById("dropdown1");
+	removeDrop.innerHTML="<span></span>";
+}
+ function removeDropdown1(){
+	var removeDrop=document.getElementById("dropdown2");
+	removeDrop.innerHTML="<span></span>";
+} 
+
+function MM_swapImgRestore() { //v3.0
+
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+
+}
+
+function MM_preloadImages() { //v3.0
+
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+
+}
+
+
+
+function MM_findObj(n, d) { //v4.01
+
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+
+}
+
+
+
+function MM_swapImage() { //v3.0
+
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+
+  if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+
+}
+
+function hideResult(){
+	document.getElementById("cross_bar").style.display="none";
+}
+function popupCart(){
+	// console.log("inside popup cart");
+	document.getElementById("cart_items").innerHTML="<div id=\"cart_message\" style=\"border-radius:2px;position: absolute;z-index: 60;border: 1px solid #999;background-color: #fff;width: 200px;text-align: center;margin-left: 38%; margin-top: -342px;height: 80px;display:block;\"><img alt=\"cancel\" onclick=\"popupCartClose()\" src=\"/img/cancel_button.png\" style=\"position:absolute;margin-left:70px;margin-top:-20px;cursor:pointer;\" /><br><h1 style=\"margin-top:15px;font-family:sans-serif;color:#999;\">Cart is Empty</h1></div>";
+}
+function popupCartClose(){
+	document.getElementById("cart_message").style.display="none";
+}
+function popupCart1(){
+	// console.log("inside popup cart");
+	document.getElementById("cart_items1").innerHTML="<div id=\"cart_message1\" style=\"border-radius:2px;position: absolute;z-index: 60;border: 1px solid #999;background-color: #fff;width: 200px;text-align: center;margin-left: -11%; margin-top: 115px;height: 80px;display:block;\"><img alt=\"cancel\" onclick=\"popupCartClose1()\" src=\"/img/cancel_button.png\" style=\"position:absolute;margin-left:70px;margin-top:-20px;cursor:pointer;\" /><br><h1 style=\"margin-top:15px;font-family:sans-serif;color:#999;\">Cart is Empty</h1></div>";
+}
+function popupCartClose1(){
+	document.getElementById("cart_message1").style.display="none";
+}
+function checkemailIDuser()
+{
+  var flag1 = false ;
+  var flag = true;
+  var email = document.getElementById("email").value;
+  $.ajax({
+	 
+	  url : "/getuserdetailsbyemailid.req?email="+email,
+	  type : "post",
+	  dataType : "json",
+	  success : function (result){
+		  // console.log(result);
+		  var status = result.status2;
+		  if(status == "success")
+			  {//debugger;
+			    flag = result.response.flag;
+			    // console.log(flag);
+			    if(flag == true)
+			    	{
+			    	  flag1 = flag;
+			    	  var labelval = document.getElementById("emailmsg");
+			    	  labelval.setAttribute("style","display : block;padding-top: 0px; width: 260px; font-size: 16px; color: white; background-color: red; margin-top: 5px; padding: 2px; border-radius: 3px;");
+			    	  document.getElementById("emaillabel").setAttribute("style","padding-top : 5px;");
+			    	  document.getElementById("fullnamelabel").setAttribute("style","padding-top : 5px;");
+			    	  document.getElementById("usernamelabel").setAttribute("style","padding-top : 5px;");
+			    	  document.getElementById("passwordlabel").setAttribute("style","padding-top : 5px;");
+			    	  document.getElementById("confirmpasswordlabel").setAttribute("style","padding-top : 5px;");
+			    	}
+			    else
+		    	{
+		    	  var labelval = document.getElementById("emailmsg");
+		    	  labelval.setAttribute("style","display : none ; padding-top: 0px; width: 260px; font-size: 16px; color: white; background-color: red; margin-top: 5px; padding: 2px; border-radius: 3px;");
+		    	  document.getElementById("passwordlabel").setAttribute("style","padding-top : 10px;");
+		    	  document.getElementById("fullnamelabel").setAttribute("style","padding-top : 10px;");
+		    	  document.getElementById("usernamelabel").setAttribute("style","padding-top : 10px;");
+		    	  document.getElementById("emaillabel").setAttribute("style","padding-top : 10px;");
+		    	  document.getElementById("confirmpasswordlabel").setAttribute("style","padding-top : 10px;");
+		    	}
+			  }
+	  },
+	  error : function () {
+		  // console.log("ckeck email error");
+	  },
+  });
+  
+  return flag1;
+}
+var jsonLogin = "{\"usernamelogin\":\"\",\"passwordlogin\":\"\"}";
+var jsonObjectLogin = JSON.parse(jsonLogin);
+function checkUserForLoginAccount()
+{
+  var flag = true ;
+  var username12 = document.getElementById("username").value;
+  var password12 = document.getElementById("password").value;
+  jsonObjectLogin.usernamelogin = username12;
+  jsonObjectLogin.passwordlogin = password12;
+  if(username12 != "" ){
+	    for(var i=0;i<username12.length;i++){
+	    	var t=username12.charAt(i);
+	    	if(t == " "){
+	    		status=false;
+	    	}
+	    	else{
+	    		// console.log("if else"+i+" :"+ status);
+	    		status=true;
+	    	}
+	    }
+		}
+	    else{
+	    	status=false;
+	    }
+  for(var i=0;i<password12.length;i++){
+	   var t=password12.charAt(i);
+	   if(t == " "){
+		   status=false;
+	   }
+	   else{
+		   status=true;
+	   }
+  }
+  if(status == false)
+	  {
+	     var labelval = document.getElementById("displayloginemptymsg");
+	     labelval.setAttribute("style","display : block; float : left;color: red; width: 165px; padding-left: 5px; padding-top: 5px; padding-bottom: 0; height: 15px; font-size: 12px;  font-weight: bold;");
+	  }
+  else{
+  $.ajax({
+	 
+	  url : "/checkuserdetailsloginattempt.req",
+	  type : "post",
+	  data: JSON.stringify(jsonObjectLogin),
+	  dataType : "json",
+	  success : function (result){
+		  // console.log(result);
+		  var status5 = result.status5;
+		  if(status5 == "success")
+			  {
+			    flag = result.response;
+			    // console.log(flag);
+			    if(flag == false)
+			    	{
+			    	  var labelval = document.getElementById("displayloginerrormsg");
+			    	  labelval.setAttribute("style","display : block; float : left;color: red; width: 165px; padding-left: 5px; padding-top: 5px; padding-bottom: 0; height: 15px; font-size: 12px;  font-weight: bold;");
+			    	  document.getElementById("displayloginemptymsg").setAttribute("style","display : none;");
+			    	}
+			    else
+			    	{
+			    	  var labelval = document.getElementById("displayloginerrormsg");
+			    	  labelval.setAttribute("style","display : none; ");
+			    	  document.getElementById("displayloginemptymsg").setAttribute("style","display : none;");
+			    	  formSubmit('signin');
+			    	}
+			  }
+	  },
+	  error : function(){
+		  // console.log("ckeck email error");
+	  },
+  });	
+  }
+  return flag;
+}
+</script>    
+ <script type="text/javascript">
+  function onSignIn(googleUser) {
+	  
+  var profile = googleUser.getBasicProfile();
+  // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  // console.log('Name: ' + profile.getName());
+  // console.log('Image URL: ' + profile.getImageUrl());
+  // console.log('Email: ' + profile.getEmail());
+  document.getElementById("fullname1").value = profile.getName();
+  document.getElementById("profileimage1").value = profile.getImageUrl();
+  document.getElementById("email1").value = profile.getEmail();
+  checkemailIDuserGoogle(profile.getEmail());
+  }
+  
+function checkemailIDuserGoogle(email)
+		{ 
+		  var flag = true ;
+			
+		  $.ajax({
+			 
+			  url : "/getuserdetailsbyemailidgoogle.req?email="+email,
+			  type : "post", 
+			  dataType : "json",
+			  success : function (result){
+				  // console.log(result);
+				  var status = result.status2;
+				  if(status == "success")
+					  {
+					    flag = result.flag;
+					    // console.log(flag);
+					    // console.log(result.response.user);
+					    user3 = result.response.user;
+					    if(flag == 1)
+					    	{
+					    	// console.log("inside if for check user  is already registered");
+					    	
+					    	window.location.assign(URL3);
+					    	document.getElementById("userimg2").setAttribute("src", ""+user3.profilePicUrl+"");
+					    	document.getElementById("userimg1").setAttribute("src", ""+user3.profilePicUrl+"");
+					    	footer();
+					    	}
+					    else if(flag == 3)
+				    	{
+					    	// console.log("inside else for check user is  not registered");
+					    	$("#googleformsubmit").submit();
+					    	footer();
+					    }
+					    else
+					    	{
+					    	 // console.log("inside else for check user not requested");
+					    	 document.getElementById("userimg1").setAttribute("src", ""+user3.profilePicUrl+"");
+					    	 document.getElementById("userimg2").setAttribute("src", ""+user3.profilePicUrl+"");
+					    	 footer();
+					    	 }
+					  }
+			  },
+			  error : function () {
+				  // console.log("ckeck email google error");
+			  },
+		  });	
+		  return flag;
+		}
+function checkemailIDuserFacebook(email)
+{ 
+  var flag = true ;
+  
+  $.ajax({
+	 
+	  url : "/getuserdetailsbyemailidfacebook.req?email="+email,
+	  type : "post", 
+	  dataType : "json",
+	  success : function (result){
+		  // console.log(result);
+		  var status = result.status2;
+		  if(status == "success")
+			  {
+			    flag = result.flag;
+			    // console.log(flag);
+			    // console.log(result.response.user);
+			    user3 = result.response.user;
+			    if(flag == 1)
+			    	{
+			    	// console.log("inside if for check user  is already registered");
+			    	window.location.assign(URL3);
+			    	document.getElementById("userimg2").setAttribute("src", ""+user3.profilePicUrl+"");
+			    	document.getElementById("userimg1").setAttribute("src", ""+user3.profilePicUrl+"");
+			    	footer();
+			    	}
+			    else if(flag == 3)
+		    	{
+			    	// console.log("inside else for check user is  not registered");
+			    	$("#facebookformsubmit").submit();
+			    	footer();
+			    }
+			    else
+			    	{
+			    	 // console.log("inside else for check user not requested");
+			    	 document.getElementById("userimg1").setAttribute("src", ""+user3.profilePicUrl+"");
+			    	 document.getElementById("userimg2").setAttribute("src", ""+user3.profilePicUrl+"");
+			    	 footer();
+			    	 }
+			  }
+	  },
+	  error : function () {
+		  // console.log("ckeck email facebook error");
+	  },
+  });	
+  return flag;
+}		
+function checkExistinguserName()
+{
+  var flag = true ;
+	var mymadeId1 = document.getElementById("Username").value;
+  $.ajax({
+	 
+	  url : "/checkuserdetailsbymymadeid.req?usernameMymade="+mymadeId1,
+	  type : "post",
+	  dataType : "json",
+	  success : function (result){
+		  // console.log(result);
+		  var status3 = result.status3;
+		  if(status3 == "success")
+			  {
+			    flag = result.response;
+			    // console.log(flag);
+			    if(flag == false)
+			    	{
+			    	  var labelval = document.getElementById("usernamemsg");
+			    	  labelval.setAttribute("style","display : block;padding-top: 0px; width: 260px; font-size: 14px; color: white; background-color: red; margin-top: 5px; padding: 2px; border-radius: 3px;");
+			    	  document.getElementById("emaillabel").setAttribute("style","padding-top : 5px;");
+			    	  document.getElementById("fullnamelabel").setAttribute("style","padding-top : 5px;");
+			    	  document.getElementById("usernamelabel").setAttribute("style","padding-top : 5px;");
+			    	  document.getElementById("passwordlabel").setAttribute("style","padding-top : 5px;");
+			    	  document.getElementById("confirmpasswordlabel").setAttribute("style","padding-top : 5px;");
+			    	  
+			    	}
+			    else
+			    	{
+			    	  var labelval = document.getElementById("usernamemsg");
+			    	  labelval.setAttribute("style","display : none ; padding-top: 0px; width: 260px; font-size: 14px; color: white; background-color: red; margin-top: 5px; padding: 2px; border-radius: 3px;");
+			    	  document.getElementById("emaillabel").setAttribute("style","padding-top : 10px;");
+			    	  document.getElementById("fullnamelabel").setAttribute("style","padding-top : 10px;");
+			    	  document.getElementById("usernamelabel").setAttribute("style","padding-top : 10px;");
+			    	  document.getElementById("passwordlabel").setAttribute("style","padding-top : 10px;");
+			    	  document.getElementById("confirmpasswordlabel").setAttribute("style","padding-top : 10px;");
+			    	  
+			    	}
+			  }
+	  },
+	  error : function () {
+		  // console.log("ckeck email error");
+	  },
+  });	
+  return flag;
+}
+		</script>
+
+
+<div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./My Made_files/bz-D0tzmBsw.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./My Made_files/bz-D0tzmBsw(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div></body></html>

@@ -1,0 +1,140 @@
+@CHARSET "ISO-8859-1";
+
+@media screen and (max-width: 1499px) {
+	.customizeproductimage{
+	border: 1px solid #DDD; height: auto; display: none; width: 39%; margin-top: -32.4%; z-index: 56; position: absolute; background-color: white;
+	}
+	.productpoopup
+{
+ border: 1px solid #DDD; 
+ height: auto; 
+ display: none; 
+ width: 40.3%;
+  margin-top: -39%; 
+ z-index: 56;
+  position: absolute; 
+ background-color: white;
+}
+.product_heart
+{
+	margin-top: 13%;
+    margin-left: 37.5%;
+}
+.product_cart
+{
+	margin-left: 34.5%;
+    margin-top: 0%;
+}
+.product_like
+{
+	margin-left: 39.5%;
+    margin-top: 24%;
+}
+.div_hover_main
+{
+	opacity: 0.8;
+	margin-bottom: 13px;
+	display:none;
+	background-image: Url(../img/product/imagehover.png);
+	height: 315px; 
+	width: 210px;
+	position: relative;
+	margin-top: -330px;
+	margin-left: 16px;
+	border: 1px solid;
+}
+}
+@media screen and (min-width: 1500px) and (max-width : 1800px) {
+	.productpoopup
+{
+ border: 1px solid #DDD; 
+ height: auto; 
+ display: none; 
+ width: 40.3%;
+  margin-top: -30%; 
+ z-index: 56;
+  position: absolute; 
+ background-color: white;
+}
+.div_hover_main
+{
+	opacity: 0.8;
+	margin-bottom: 13px;
+	display:none;
+	background-image: Url(../img/product/imagehover.png);
+	height: 315px; 
+	width: 210px;
+	position: relative;
+	margin-top: -330px;
+	margin-left: 15% !important;
+	border: 1px solid;
+}
+.customizeproductimage{
+	border: 1px solid #DDD; height: auto; display: none; width: 39%; margin-top: -25.4%; z-index: 56; position: absolute; background-color: white;
+	}
+	.product_heart
+{
+	margin-top: 13%;
+    margin-left: 37.5%;
+     display : none;
+}
+.product_cart
+{
+	margin-left: 34.5%;
+    margin-top: 0%;
+     display : none;
+}
+.product_like
+{
+	margin-left: 39.5%;
+    margin-top: 24%;
+     display : none;
+}
+}
+@media screen and (min-width: 1801px) {
+	.productpoopup
+{
+ border: 1px solid #DDD; 
+ height: auto; 
+ display: none; 
+ width: 40.3%;
+  margin-top: -26%; 
+ z-index: 56;
+  position: absolute; 
+ background-color: white;
+}
+.div_hover_main
+{
+	opacity: 0.8;
+	margin-bottom: 13px;
+	display:none;
+	background-image: Url(../img/product/imagehover.png);
+	height: 315px; 
+	width: 210px;
+	position: relative;
+	margin-top: -330px;
+	margin-left: 20% !important;
+	border: 1px solid;
+}
+.customizeproductimage{
+	border: 1px solid #DDD; height: auto; display: none; width: 39%; margin-top: -22.4%; z-index: 56; position: absolute; background-color: white;
+	}
+	.product_heart
+{
+	margin-top: 13%;
+    margin-left: 37.5%;
+    display : none;
+}
+.product_cart
+{
+	margin-left: 34.5%;
+    margin-top: 0%;
+    display : none;
+}
+.product_like
+{
+	margin-left: 39.5%;
+    margin-top: 24%;
+    display : none;
+}
+}
